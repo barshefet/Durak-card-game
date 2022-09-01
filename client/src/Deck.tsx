@@ -6,6 +6,15 @@ export class Deck {
   constructor(c: any) {
     this.cards = c;
   }
+
+  shuffle(){
+    for(let index = 1; index < this.cards.length; index++){
+      let newIndex = Math.floor(Math.random() * (index + 1))
+      let temp = this.cards[newIndex]
+      this.cards[newIndex] = this.cards[index]  
+      this.cards[index] = temp
+    }
+  }
 }
 
 
@@ -28,5 +37,8 @@ const makeDeck = () => {
 }
 
 export const newDeck = () => {
-return new Deck(makeDeck())
+let deck = new Deck(makeDeck()).shuffle()
+return deck
 }
+
+

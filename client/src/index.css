@@ -2,6 +2,7 @@ body {
   margin: 0;
   background-color: #353535;
   font-family: 'Poppins';
-
+  height: 100%; 
+  overflow: hidden
 }
 

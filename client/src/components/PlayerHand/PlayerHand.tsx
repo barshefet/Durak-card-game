@@ -10,7 +10,9 @@ const PlayerHand = () => {
           <img className="player-card" src="images/blue2.svg" alt="" />
           <img className="player-card" src="images/red.svg" alt="" />
           <img className="player-card" src="images/red2.svg" alt="" />
+          <img className="player-card" src="images/diamonds/king.svg" alt="" />
         </div>
+        
       </div>
     </>
   );

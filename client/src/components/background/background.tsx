@@ -1,4 +1,6 @@
 import React from "react";
+import ReturnButton from "../ReturnButton/ReturnButton";
+
 
 const Background = () => {
   return (
@@ -7,6 +9,7 @@ const Background = () => {
       <div className="container">
         <div className="table"></div>
       </div>
+<ReturnButton />
     </>
   );
 };

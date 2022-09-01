@@ -15,11 +15,11 @@
 
 .container {
     @include center();
-    height: 800px;
+    height: 700px;
     .table {
         background-color: #355f48;
-        width: 850px;
-        height: 500px;
+        width: 900px;
+        height: 600px;
         border-radius: 400px;
         @include center();
         border: rgb(255, 255, 255) solid 15px;
