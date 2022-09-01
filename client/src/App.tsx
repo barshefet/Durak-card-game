@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect } from "react";
+import Background from "./components/background/background";
+import PlayerHand from "./components/PlayerHand/PlayerHand";
+import { newDeck } from "./Deck";
+import "./components/background/background.scss";
+import './components/PlayerHand/PlayerHand.scss'
 
 function App() {
+  useEffect(() => {
+    let newdeck = newDeck();
+    console.log(newdeck);
+  }, []);
+
   return (
     <>
-    <h1>Hello</h1>
+      <Background />
+      <PlayerHand />
     </>
   );
 }

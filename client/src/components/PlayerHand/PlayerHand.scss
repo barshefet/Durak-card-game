@@ -1,0 +1,30 @@
+
+@mixin center {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.player-hand-container{
+    position: absolute;
+    width: 100vmax;
+    top: 69%;
+    left: 0;
+.player-hand{
+@include center();
+z-index: 2134;
+margin-bottom: 10px;
+
+    .player-card{
+        height: 160px;
+        margin-left: 5px;
+        &:hover{
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+        
+    }
+}
+}
