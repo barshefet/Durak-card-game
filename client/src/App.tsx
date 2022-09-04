@@ -7,6 +7,8 @@ import "./components/PlayerHand/PlayerHand.scss";
 import "./components/ReturnButton/ReturnButton.scss";
 import "./components/Deck/TableDeck.scss"
 import TableDeck from "./components/Deck/TableDeck";
+import Opponent from "./components/Opponent/Opponent";
+import './components/Opponent/Opponent.scss'
 
 function App() {
   useEffect(() => {
@@ -18,6 +20,7 @@ function App() {
       <Background />
       <PlayerHand />
       <TableDeck />
+      <Opponent />
     </>
   );
 }

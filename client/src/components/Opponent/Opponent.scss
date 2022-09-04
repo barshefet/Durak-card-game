@@ -1,0 +1,44 @@
+.opponent {
+    position: absolute;
+    top: 10%;
+    left: 67%;
+    z-index: 20;
+    background-color: rgba(128, 128, 128, 0.458);
+    border-radius: 10px;
+    width: fit-content;
+
+    .pic {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            height: 100px;
+            margin: 5px;
+        }
+        .status-attack{
+            position: absolute;
+            top: 25%;
+            left: 0;
+            z-index: 1;
+            background-color: rgb(78, 177, 42);
+            border-radius: 5px;
+            img{
+                height: 50px;
+            }
+        }
+    }
+
+    .opponent-cards {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .opponent-card {
+            img {
+                height: 50px;
+                margin-left: 2px;
+                margin-right: 2px;
+            }
+        }
+    }
+}

@@ -9,7 +9,7 @@ const TableDeck = () => {
         </div>
         <div className="card-stack">
           <div className="card1">
-            <img className="card" src="images/red.svg" alt="back" />
+            <img className="card" src="images/red2.svg" alt="back" />
           </div>
           <div className="card2">
             <img className="card" src="images/red2.svg" alt="back" />

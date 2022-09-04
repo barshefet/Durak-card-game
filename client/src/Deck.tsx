@@ -59,9 +59,8 @@ let deck = new Deck(makeDeck())
 deck.shuffle()
 let sh = deck.kozar()
 deck.dealDeck(4)
-// console.log(Players)
-// console.log(sh, deck)
-return Players + sh + deck
+console.log(Players)
+console.log(sh, deck)
 }
 
 
