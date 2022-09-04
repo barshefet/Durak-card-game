@@ -5,6 +5,8 @@ import { newDeck } from "./Deck";
 import "./components/background/background.scss";
 import "./components/PlayerHand/PlayerHand.scss";
 import "./components/ReturnButton/ReturnButton.scss";
+import "./components/Deck/TableDeck.scss"
+import TableDeck from "./components/Deck/TableDeck";
 
 function App() {
   useEffect(() => {
@@ -15,6 +17,7 @@ function App() {
     <>
       <Background />
       <PlayerHand />
+      <TableDeck />
     </>
   );
 }

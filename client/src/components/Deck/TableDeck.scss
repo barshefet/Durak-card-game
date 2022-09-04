@@ -1,0 +1,46 @@
+.deck {
+    position: absolute;
+    top: 12%;
+    left: 45%;
+    .kozar{
+        position: relative;
+        
+        left: 60%;
+        z-index: 0;
+        .card{
+            margin-top: 10px;
+            transform: rotate(90deg);
+            height: 130px;
+        }
+    }
+    .card-stack {
+        .card1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .card2 {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            z-index: 2;
+        }
+        .card3 {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            z-index: 3;
+        }
+        .card4 {
+            position: absolute;
+            top: 15%;
+            left: 15%;
+            z-index: 4;
+        }
+        
+    }
+    .card{
+        height: 110px;
+    }
+}
