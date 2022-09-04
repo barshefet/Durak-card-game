@@ -1,5 +1,10 @@
 const SUITE = ["clubs", "hearts", "diamonds", "spades"];
 const VALUES = ["6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+const Player1: Card[] = [] 
+const Player2: Card[] = []
+const Player3: Card[] = []
+const Player4: Card[] = []
+let Players: any[] = [Player1,Player2,Player3,Player4] 
 
 export class Deck {
     cards
@@ -13,6 +18,19 @@ export class Deck {
       let temp = this.cards[newIndex]
       this.cards[newIndex] = this.cards[index]  
       this.cards[index] = temp
+    }
+  }
+
+  kozar() {
+    let Kozar = this.cards.shift() 
+    return Kozar 
+  }
+
+  dealDeck(numberOfPlayers: number) {
+    for (let i = 0; i < numberOfPlayers; i++){
+      for(let j = 0; j < 6; j++){
+        Players[i].push(this.cards.shift())
+      }
     }
   }
 }
@@ -37,8 +55,14 @@ const makeDeck = () => {
 }
 
 export const newDeck = () => {
-let deck = new Deck(makeDeck()).shuffle()
-return deck
+let deck = new Deck(makeDeck())
+deck.shuffle()
+let sh = deck.kozar()
+deck.dealDeck(4)
+// console.log(Players)
+// console.log(sh, deck)
+return Players + sh + deck
 }
+
 
 
