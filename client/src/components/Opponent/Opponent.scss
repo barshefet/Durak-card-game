@@ -9,6 +9,8 @@
     img {
         height: 50px;
         width: 50px;
+        -webkit-user-drag: none;
+
     }
 }
 
@@ -29,6 +31,8 @@
         img {
             height: 100px;
             margin: 5px;
+            -webkit-user-drag: none;
+
         }
         .status-attack {
             background-color: rgba(147, 67, 67, 0.5);
@@ -53,6 +57,8 @@
                 height: 50px;
                 margin-left: 2px;
                 margin-right: 2px;
+                -webkit-user-drag: none;
+
             }
         }
     }

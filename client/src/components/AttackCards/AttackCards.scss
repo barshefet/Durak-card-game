@@ -1,0 +1,18 @@
+.attack-cards-container{
+    position: absolute;
+    top: 40%;
+    left: 32%;
+    .attack-cards{
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        .attack-card{
+            margin: 10px;
+            img{
+            height: 140px;
+            -webkit-user-drag: none;
+
+            }
+        }
+    }
+}

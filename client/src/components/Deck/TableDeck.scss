@@ -2,13 +2,14 @@
     position: absolute;
     top: 12%;
     left: 45%;
-    .kozar{
+    .kozar {
         position: relative;
         left: 60%;
         z-index: 0;
-        .card{
+        .card {
             transform: rotate(90deg);
             height: 130px;
+            -webkit-user-drag: none;
         }
     }
     .card-stack {
@@ -36,9 +37,9 @@
             left: 15%;
             z-index: 4;
         }
-        
     }
-    .card{
+    .card {
         height: 110px;
+        -webkit-user-drag: none;
     }
 }

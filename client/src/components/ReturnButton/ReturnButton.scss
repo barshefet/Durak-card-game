@@ -5,6 +5,8 @@
     img{
         height: 130px;
         transform: scaleY(-1);
+        -webkit-user-drag: none;
+
         &:hover{
             transform: scaleY(-1.1) scaleX(1.1);
             cursor: pointer;
