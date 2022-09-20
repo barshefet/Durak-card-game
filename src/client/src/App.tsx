@@ -15,17 +15,23 @@ import './components/AttackCards/AttackCards.scss'
 function App() {
   useEffect(() => {
     let newdeck = newDeck();
-    console.log(newdeck)
+    setMtf(newdeck)
+    setPlayerCards(newdeck.players[0])
+    
   }, []);
 
+const [mtf, setMtf] = useState({})
 const [defender, setDefender] = useState(false)
 const [attacker, setAttacker] = useState(false)
 const [contributer, setContributer] = useState(false)
+const [playerCards, setPlayerCards] = useState([])
+
+
 
   return (
     <>
       <Background />
-      <PlayerHand />
+      <PlayerHand cards={playerCards} attacker={attacker} defender={defender} contributer={contributer}/>
       <TableDeck />
       <Opponent />
       <AttackCards defender={defender}/>

@@ -1,5 +1,5 @@
 const SUITE = ["clubs", "hearts", "diamonds", "spades"];
-const VALUES = ["6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+const VALUES = ["6", "7", "8", "9", "10", "jack", "queen", "king", "ace"];
 const Player1: Card[] = [] 
 const Player2: Card[] = []
 const Player3: Card[] = []
