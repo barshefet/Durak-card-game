@@ -1,42 +1,18 @@
-import React, { useEffect, useState } from "react";
-import Background from "./components/background/background";
-import PlayerHand from "./components/PlayerHand/PlayerHand";
-import { newDeck } from "./Deck";
-import "./components/background/background.scss";
-import "./components/PlayerHand/PlayerHand.scss";
-import "./components/ReturnButton/ReturnButton.scss";
-import "./components/Deck/TableDeck.scss"
-import TableDeck from "./components/Deck/TableDeck";
-import Opponent from "./components/Opponent/Opponent";
-import './components/Opponent/Opponent.scss'
-import AttackCards from "./components/AttackCards/AttackCards";
-import './components/AttackCards/AttackCards.scss'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Game from "./components/Game";
+import Home from "./components/HomeComponents/Home";
 
-function App() {
-  useEffect(() => {
-    let newdeck = newDeck();
-    setMtf(newdeck)
-    setPlayerCards(newdeck.players[0])
-    
-  }, []);
-
-const [mtf, setMtf] = useState({})
-const [defender, setDefender] = useState(false)
-const [attacker, setAttacker] = useState(false)
-const [contributer, setContributer] = useState(false)
-const [playerCards, setPlayerCards] = useState([])
-
-
-
+const App = () => {
   return (
     <>
-      <Background />
-      <PlayerHand cards={playerCards} attacker={attacker} defender={defender} contributer={contributer}/>
-      <TableDeck />
-      <Opponent />
-      <AttackCards defender={defender}/>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/game" element={<Game />} />
+        {/* <Route path='/rules' element={<Rules />}/> */}
+      </Routes>
     </>
   );
-}
+};
 
 export default App;
