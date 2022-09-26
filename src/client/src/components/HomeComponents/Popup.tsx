@@ -18,8 +18,8 @@ const Popup = (props: any) => {
             <label htmlFor="">Room ID</label>
             <input type="text" />
             <div className="buttons">
-            <button type="submit">Create</button>
-            <button type="submit">Connect</button>
+            <button type="submit"className="btn">Create</button>
+            <button type="submit" className="btn">Connect</button>
             </div>
           </form>
         </div>

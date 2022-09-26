@@ -9,9 +9,9 @@
     z-index: 100;
     position: fixed;
     top: 29%;
-    left: calc(50% - 300px);
+    left: calc(50% - 400px);
     height: 450px;
-    width: 600px;
+    width: 800px;
     background-color: white;
     outline: black solid 4px;
     .title {
@@ -27,14 +27,30 @@
         margin-top: 60px;
         form {
             @include align();
+            input{
+                width: 350px;
+                height: 40px;
+                text-align: center;
+                font-size: 25px;
+                font-weight: 600;
+                outline: black solid 4px;
+            }
+            .btn{
+                margin: 10px;
+                width: 120px;
+                height: 40px;
+                outline: black solid 4px;
+                background-color: white;
+            }
         }
         .close-window {
             transform: scaleY(-1);
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 2%;
+            left: 1%;
+            outline: black solid 3px;
             img {
-                height: 80px;
+                height: 70px;
             }
             &:hover {
                 transform: scaleY(-1.1) scaleX(1.1);
