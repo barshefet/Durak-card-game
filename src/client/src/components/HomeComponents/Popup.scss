@@ -24,9 +24,14 @@
     }
     .form-container {
         @include align();
-        margin-top: 60px;
+        margin-top: 10px;
         form {
             @include align();
+            label{
+                margin: 10px;
+                font-size: larger;
+                font-weight: 600;
+            }
             input{
                 width: 350px;
                 height: 40px;
@@ -34,28 +39,37 @@
                 font-size: 25px;
                 font-weight: 600;
                 outline: black solid 4px;
+                border: none;
             }
             .btn{
-                margin: 10px;
+                margin: 25px;
                 width: 120px;
                 height: 40px;
+                border: none;
                 outline: black solid 4px;
                 background-color: white;
+                font-weight: 700;
+                font-size: 22px;
+                &:hover{
+                    scale: 1.1;
+                    cursor: pointer;
+                }
             }
         }
         .close-window {
             transform: scaleY(-1);
             position: absolute;
-            top: 2%;
-            left: 1%;
-            outline: black solid 3px;
+            top: 0%;
+            left: 0%;
+            outline: black solid 4px;
             img {
                 height: 70px;
+                &:hover {
+                    transform: scaleY(1.1) scaleX(1.1);
+                    cursor: pointer;
+                }
             }
-            &:hover {
-                transform: scaleY(-1.1) scaleX(1.1);
-                cursor: pointer;
-            }
+            
         }
     }
 }

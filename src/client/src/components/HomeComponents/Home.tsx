@@ -16,20 +16,16 @@ const Home = () => {
       </div>
 
       <div className="menu">
-        {/* <Link style={{ textDecoration: 'none'}} to="/game"> */}
         <div onClick={() => setPopup(true)}>
           <h3>Play</h3>
         </div>
-        {/* </Link> */}
         <div>
-          <h3>what are the rules?</h3>
+          <h3>Rules</h3>
         </div>
         <div>
-          <h3>game dev docs</h3>
+          <h3>Game-Dev docs</h3>
         </div>
-        <div>
-          <h3>what is this button?</h3>
-        </div>
+        
       </div>
     </>
   );
