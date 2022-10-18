@@ -1,13 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ReturnButton = () => {
-return(
-    <>
-    <div className="return-container">
-        <img src="images/return.png" alt="return"  />
-    </div>
-    </>
-)
-}
+  const navigate = useNavigate();
 
-export default ReturnButton
+  return (
+    <>
+      <div className="return-container">
+        <img src="images/return.png" alt="return" onClick={() => navigate('/')}/>
+      </div>
+    </>
+  );
+};
+
+export default ReturnButton;
