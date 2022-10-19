@@ -25,7 +25,7 @@ function Game() {
         cards={playerCards}
         attacker={attacker}
         defender={defender}
-        contributer={contributer}
+        contributer={contributer} 
       />
       <TableDeck />
       <Opponent />

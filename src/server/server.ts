@@ -11,6 +11,8 @@ const io = new Server(server, { cors: { origin: "http://localhost:3000" } });
 io.on("connection", (socket:any) => {
   console.log(typeof socket)
   console.log(`client connected`)
+
+  
 })
 
 server.listen(4000, () => {
