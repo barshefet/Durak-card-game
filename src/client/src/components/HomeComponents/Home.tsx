@@ -6,7 +6,7 @@ import Popup from "./Popup";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const [popup, setPopup] = useState(true);
+  const [popup, setPopup] = useState(false);
   return (
     <>
       <Popup trigger={popup} setTrigger={setPopup}/>
