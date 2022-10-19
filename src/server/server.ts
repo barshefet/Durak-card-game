@@ -1,34 +1,18 @@
-import path from "path";
-import express, { Express } from "express";
-import cors from "cors";
-import { json } from "body-parser";
+import express from "express";
+import http from "http";
+import { Server } from "socket.io";
 
-const app: Express = express();
-const http = require("http");
+const app = express();
+
 const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server);
 
-app.use(cors());
-app.use(json());
-const root: string = path.join(process.cwd(), "client");
+const io = new Server(server, { cors: { origin: "http://localhost:3000" } });
 
-app.use(express.static(root));
+io.on("connection", (socket:any) => {
+  console.log(typeof socket)
+  console.log(`client connected`)
+})
 
-app.get("*", (_req, res) => {
-  res.sendFile(path.join(root, "index.html"));
-});
-
-io.on("connection", (socket: any) => {
-  console.log(`a user connected on socket: ${socket}`);
-});
-
-const port = process.env.PORT || 4000;
-// app.listen(4001, () => {
-//   console.log("Hosted: http://localhost:" + port);
-// });
-
-server.listen(port, () => {
-  console.log(`listening on port : ${port}`);
-});
-
+server.listen(4000, () => {
+  console.log('server started on port 4000')
+})
