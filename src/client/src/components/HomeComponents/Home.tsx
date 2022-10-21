@@ -3,13 +3,19 @@
 import React, { useState } from "react";
 import "./Home.scss";
 import Popup from "./Popup";
-import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home = (props: any) => {
   const [popup, setPopup] = useState(false);
   return (
     <>
-      <Popup trigger={popup} setTrigger={setPopup}/>
+      <Popup
+        trigger={popup}
+        setTrigger={setPopup}
+        roomID={props.roomID}
+        setRoomID={props.setRoomID}
+        playerName={props.playerName}
+        setName={props.setName}
+      />
       <div className="headline">
         <h1>Durak Card Game</h1>
         <h2>made by Bar Shefet</h2>
@@ -25,7 +31,6 @@ const Home = () => {
         <div>
           <h3>Game-Dev docs</h3>
         </div>
-        
       </div>
     </>
   );

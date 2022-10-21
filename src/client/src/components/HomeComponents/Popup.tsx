@@ -4,14 +4,12 @@ import "./Popup.scss";
 
 const Popup = (props: any) => {
 
-const [roomID, setRoomID] = useState('')
-const [name, setName] = useState('')
 const [type, setType] = useState('')
 const navigate = useNavigate()
 
 const formSubmit = (e: any) =>{
   e.preventDefault()
-  console.log(roomID, name, type)
+  console.log(props.roomID, props.name, type)
   if(type === 'create'){
     //start a socket with the id given
     navigate('/game')
@@ -35,9 +33,9 @@ const formSubmit = (e: any) =>{
           </div>
           <form action="submit" onSubmit={formSubmit}>
             <label htmlFor="">Room ID</label>
-            <input type="text" value={roomID} onChange={(e) => setRoomID(e.target.value)}/>
+            <input type="text" value={props.roomID} onChange={(e) => props.setRoomID(e.target.value)}/>
             <label htmlFor="">Player Name</label>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+            <input type="text" value={props.playerName} onChange={(e) => props.setName(e.target.value)}/>
             <div className="buttons">
             <button type="submit" className="btn" onClick={() => setType('create')}>Create</button>
             <button type="submit" className="btn" onClick={() => setType('connect')}>Connect</button>
