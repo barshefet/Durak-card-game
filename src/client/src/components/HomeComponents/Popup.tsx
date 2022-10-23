@@ -16,7 +16,7 @@ const formSubmit = (e: any) =>{
     navigate('/game')
   }else if(type === 'connect'){
     //join a socket with the id given
-    socket.emit('join-room', props.roomID)
+    socket.emit('join-room', props.roomID, props.playerName)
     navigate('/game')
   }
 }

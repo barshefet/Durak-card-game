@@ -12,6 +12,7 @@ const app = (0, express_1.default)();
 const PORT = process.env.PORT || 4000;
 const root = path_1.default.join(process.cwd(), "client");
 const server = http_1.default.createServer(app);
+const ROOMS = [];
 app.get("*", (_req, res) => {
     res.sendFile(path_1.default.join(root, "index.html"));
 });
@@ -20,14 +21,18 @@ io.on("connection", (socket) => {
     console.log(`client connected`);
     socket.on('create-room', (roomID, playerName) => {
         socket.join(roomID);
-        let mtf = new MTF_1.MTF(false, 0, playerName);
-        // console.log(mtf)
+        let mtf = new MTF_1.MTF(roomID, false, [playerName], [], 0);
+        ROOMS.push(mtf);
+        console.log(ROOMS);
         io.to(roomID).emit("receive-mtf", mtf);
         console.log(`${playerName} created room: ${roomID}`);
     });
-    socket.on('join-room', (roomID) => {
-        socket.join(roomID);
-        console.log(`client joined room: ${roomID}`);
+    socket.on('join-room', (ID, playerName) => {
+        socket.join(ID);
+        let roomMTF = ROOMS.find(room => room.roomID === ID);
+        roomMTF?.joinGame(playerName);
+        console.log(roomMTF);
+        console.log(`${playerName} joined room: ${ID}`);
     });
 });
 server.listen(PORT, () => {
