@@ -10,7 +10,6 @@ import Opponent from "./GameComponents/Opponent/Opponent";
 import "./GameComponents/Opponent/Opponent.scss";
 import AttackCards from "./GameComponents/AttackCards/AttackCards";
 import "./GameComponents/AttackCards/AttackCards.scss";
-import {socket} from '../service/socket'
 
 
 function Game(props:any) {
@@ -22,7 +21,6 @@ function Game(props:any) {
 
   useEffect(()=>{
     console.log(props.roomID + ' ' + props.playerName)
-    // socket.emit('join-room', props.roomID)
   },[])
 
   return (

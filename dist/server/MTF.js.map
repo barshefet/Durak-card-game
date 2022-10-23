@@ -1,0 +1,1 @@
+{"version":3,"file":"MTF.js","sourceRoot":"","sources":["../../src/server/MTF.ts"],"names":[],"mappings":";;;AAAA,MAAa,GAAG;IAKhB,YAAY,SAAkB,EAAE,KAAa,EAAE,KAAa;QACxD,IAAI,CAAC,SAAS,GAAG,SAAS,CAAA;QAC1B,IAAI,CAAC,KAAK,GAAG,KAAK,CAAA;QAClB,IAAI,CAAC,KAAK,GAAG,KAAK,CAAA;IACtB,CAAC;CACA;AAVD,kBAUC"}

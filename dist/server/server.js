@@ -7,6 +7,7 @@ const path_1 = __importDefault(require("path"));
 const express_1 = __importDefault(require("express"));
 const http_1 = __importDefault(require("http"));
 const socket_io_1 = require("socket.io");
+const MTF_1 = require("./MTF");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 4000;
 const root = path_1.default.join(process.cwd(), "client");
@@ -20,6 +21,8 @@ io.on("connection", (socket) => {
     socket.on('create-room', (roomID, playerName) => {
         socket.join(roomID);
         console.log(`${playerName} created room: ${roomID}`);
+        let mtf = new MTF_1.MTF(false, 0, playerName);
+        console.log(mtf);
     });
     socket.on('join-room', (roomID) => {
         socket.join(roomID);
