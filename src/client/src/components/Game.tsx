@@ -10,7 +10,7 @@ import Opponent from "./GameComponents/Opponent/Opponent";
 import "./GameComponents/Opponent/Opponent.scss";
 import AttackCards from "./GameComponents/AttackCards/AttackCards";
 import "./GameComponents/AttackCards/AttackCards.scss";
-import * as io from "socket.io-client";
+import {socket} from '../service/socket'
 
 
 function Game(props:any) {
@@ -21,9 +21,8 @@ function Game(props:any) {
   const [playerCards, setPlayerCards] = useState([]);
 
   useEffect(()=>{
-    const socket = io.connect("http://localhost:4000");
     console.log(props.roomID + ' ' + props.playerName)
-    socket.emit('join-room', props.roomID)
+    // socket.emit('join-room', props.roomID)
   },[])
 
   return (

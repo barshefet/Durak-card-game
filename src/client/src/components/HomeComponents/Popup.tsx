@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Popup.scss";
+import {socket} from '../../service/socket'
 
 const Popup = (props: any) => {
 
@@ -12,9 +13,11 @@ const formSubmit = (e: any) =>{
   console.log(props.roomID, props.name, type)
   if(type === 'create'){
     //start a socket with the id given
+    socket.emit('create-room', props.roomID, props.playerName)
     navigate('/game')
   }else if(type === 'connect'){
     //join a socket with the id given
+    socket.emit('join-room', props.roomID)
     navigate('/game')
   }
 }

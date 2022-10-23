@@ -18,6 +18,11 @@ const io = new Server(server, { cors: { origin: "http://localhost:3000" } });
 io.on("connection", (socket: any) => {
   console.log(`client connected`);
 
+  socket.on('create-room', (roomID: string, playerName: string) => {
+    socket.join(roomID)
+    console.log(`${playerName} created room: ${roomID}`)
+  })
+  
   socket.on('join-room', (roomID:any) => {
     socket.join(roomID)
     console.log(`client joined room: ${roomID}`)
