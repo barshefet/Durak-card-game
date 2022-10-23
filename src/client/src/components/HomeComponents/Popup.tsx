@@ -10,7 +10,6 @@ const navigate = useNavigate()
 
 const formSubmit = (e: any) =>{
   e.preventDefault()
-  console.log(props.roomID, props.name, type)
   if(type === 'create'){
     //start a socket with the id given
     socket.emit('create-room', props.roomID, props.playerName)

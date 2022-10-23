@@ -21,10 +21,10 @@ io.on("connection", (socket: any) => {
 
   socket.on('create-room', (roomID: string, playerName: string) => {
     socket.join(roomID)
+    let mtf: MTF = new MTF(false, 0, playerName)
+    // console.log(mtf)
+    io.to(roomID).emit("receive-mtf", mtf)
     console.log(`${playerName} created room: ${roomID}`)
-    let mtf = new MTF(false, 0, playerName)
-    console.log(mtf)
-    // socket.to(roomID).emit(mtf)
   })
   
   socket.on('join-room', (roomID:any) => {

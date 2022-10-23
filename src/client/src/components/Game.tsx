@@ -10,10 +10,11 @@ import Opponent from "./GameComponents/Opponent/Opponent";
 import "./GameComponents/Opponent/Opponent.scss";
 import AttackCards from "./GameComponents/AttackCards/AttackCards";
 import "./GameComponents/AttackCards/AttackCards.scss";
+import {socket} from '../service/socket'
 
 
 function Game(props:any) {
-  // const [mtf, setMtf] = useState({});
+  const [mtf, setMtf] = useState({});
   const [defender, setDefender] = useState(false);
   const [attacker, setAttacker] = useState(false);
   const [contributer, setContributer] = useState(false);
@@ -22,6 +23,10 @@ function Game(props:any) {
   useEffect(()=>{
     console.log(props.roomID + ' ' + props.playerName)
   },[])
+
+  socket.on("receive-mtf", (mtf) => {
+    console.log(mtf)
+  })
 
   return (
     <>

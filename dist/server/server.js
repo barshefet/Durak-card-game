@@ -20,9 +20,10 @@ io.on("connection", (socket) => {
     console.log(`client connected`);
     socket.on('create-room', (roomID, playerName) => {
         socket.join(roomID);
-        console.log(`${playerName} created room: ${roomID}`);
         let mtf = new MTF_1.MTF(false, 0, playerName);
-        console.log(mtf);
+        // console.log(mtf)
+        io.to(roomID).emit("receive-mtf", mtf);
+        console.log(`${playerName} created room: ${roomID}`);
     });
     socket.on('join-room', (roomID) => {
         socket.join(roomID);
