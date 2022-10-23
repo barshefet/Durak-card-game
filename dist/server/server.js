@@ -19,7 +19,7 @@ app.get("*", (_req, res) => {
 const io = new socket_io_1.Server(server, { cors: { origin: "http://localhost:3000" } });
 io.on("connection", (socket) => {
     console.log(`client connected`);
-    socket.on('create-room', (roomID, playerName) => {
+    socket.on("create-room", (roomID, playerName) => {
         socket.join(roomID);
         let mtf = new MTF_1.MTF(roomID, false, [playerName], [], 0);
         ROOMS.push(mtf);
@@ -27,12 +27,16 @@ io.on("connection", (socket) => {
         io.to(roomID).emit("receive-mtf", mtf);
         console.log(`${playerName} created room: ${roomID}`);
     });
-    socket.on('join-room', (ID, playerName) => {
+    socket.on("join-room", (ID, playerName) => {
         socket.join(ID);
-        let roomMTF = ROOMS.find(room => room.roomID === ID);
+        let roomMTF = ROOMS.find((room) => room.roomID === ID);
         roomMTF?.joinGame(playerName);
-        console.log(roomMTF);
         console.log(`${playerName} joined room: ${ID}`);
+    });
+    socket.on("ready-to-play", (ID, playerName) => {
+        let roomMTF = ROOMS.find((room) => room.roomID === ID);
+        roomMTF?.playerReady(playerName);
+        console.log(roomMTF);
     });
 });
 server.listen(PORT, () => {

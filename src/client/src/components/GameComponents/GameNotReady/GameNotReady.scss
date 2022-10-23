@@ -1,0 +1,40 @@
+@mixin ready-button-temp {
+    position: fixed;
+    top: 58%;
+    left: calc(50% - 75px);
+    button {
+        width: 150px;
+        height: 70px;
+        font-size: 25px;
+        border-radius: 10px;
+        border: 0;
+        font-weight: 600;
+        outline: black solid 1px;
+        &:hover {
+            scale: 1.1;
+        }
+        &:active {
+            scale: 0.9;
+        }
+    }
+}
+
+.ready-button {
+    @include ready-button-temp();
+    .red {
+        background-color: rgb(231, 5, 5);
+    }
+    .green {
+        background-color: rgb(31, 195, 31);
+    }
+}
+
+.ready-status{
+    position: fixed;
+    top: 53%;
+    left: calc(50% - 130px);
+    width: 260px;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+}

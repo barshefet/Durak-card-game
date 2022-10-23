@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Background from "./GameComponents/background/background";
 import PlayerHand from "./GameComponents/PlayerHand/PlayerHand";
 import "./GameComponents/background/background.scss";
@@ -10,36 +10,39 @@ import Opponent from "./GameComponents/Opponent/Opponent";
 import "./GameComponents/Opponent/Opponent.scss";
 import AttackCards from "./GameComponents/AttackCards/AttackCards";
 import "./GameComponents/AttackCards/AttackCards.scss";
-import {socket} from '../service/socket'
+import GameNotReady from "./GameComponents/GameNotReady/Ready";
+import { socket } from "../service/socket";
 
-
-function Game(props:any) {
-  const [mtf, setMtf] = useState({});
+function Game(props: any) {
   const [defender, setDefender] = useState(false);
   const [attacker, setAttacker] = useState(false);
   const [contributer, setContributer] = useState(false);
   const [playerCards, setPlayerCards] = useState([]);
-
-  useEffect(()=>{
-    console.log(props.roomID + ' ' + props.playerName)
-  },[])
+  const [roomReady, setRoomReady] = useState(false);
 
   socket.on("receive-mtf", (mtf) => {
-    console.log(mtf)
-  })
+    setRoomReady(mtf.roomReady);
+    setPlayerCards(mtf.playerCards);
+  });
 
-  return (
+  return roomReady ? (
     <>
       <Background />
       <PlayerHand
         cards={playerCards}
         attacker={attacker}
         defender={defender}
-        contributer={contributer} 
+        contributer={contributer}
       />
       <TableDeck />
       <Opponent />
       <AttackCards defender={defender} />
+    </>
+  ) : (
+    <>
+    <Background />
+    <Opponent />
+    <GameNotReady roomID={props.roomID} playerName={props.playerName}/>
     </>
   );
 }
