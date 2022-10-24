@@ -25,22 +25,30 @@ io.on("connection", (socket: any) => {
     socket.join(roomID);
     let mtf: MTF = new MTF(roomID, false, [playerName], [], 0);
     ROOMS.push(mtf);
-    console.log(ROOMS);
     io.to(roomID).emit("receive-mtf", mtf);
     console.log(`${playerName} created room: ${roomID}`);
   });
 
   socket.on("join-room", (ID: any, playerName: string) => {
+    //TODO: if game started or max players are in : no one can join 
     socket.join(ID);
-    let roomMTF = ROOMS.find((room) => room.roomID === ID);
-    roomMTF?.joinGame(playerName);
+    let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
+    ROOMS[roomMTF]?.joinGame(playerName);
+    io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
     console.log(`${playerName} joined room: ${ID}`);
   });
 
   socket.on("ready-to-play", (ID: string, playerName: string) => {
-    let roomMTF = ROOMS.find((room) => room.roomID === ID);
-    roomMTF?.playerReady(playerName)
-    console.log(roomMTF)
+    let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
+    ROOMS[roomMTF]?.playerReady(playerName)
+    console.log(`${playerName} is ready`)
+    if(ROOMS[roomMTF].playersReady.length >= 2 && ROOMS[roomMTF].playersReady.length === ROOMS[roomMTF].players.length){
+      console.log('game is starting')
+      //handle deck
+      //send new phase
+    }else{
+    io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
+    }
   });
 });
 

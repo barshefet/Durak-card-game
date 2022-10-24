@@ -29,14 +29,23 @@ io.on("connection", (socket) => {
     });
     socket.on("join-room", (ID, playerName) => {
         socket.join(ID);
-        let roomMTF = ROOMS.find((room) => room.roomID === ID);
-        roomMTF?.joinGame(playerName);
+        let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
+        ROOMS[roomMTF]?.joinGame(playerName);
+        io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
         console.log(`${playerName} joined room: ${ID}`);
     });
     socket.on("ready-to-play", (ID, playerName) => {
-        let roomMTF = ROOMS.find((room) => room.roomID === ID);
-        roomMTF?.playerReady(playerName);
-        console.log(roomMTF);
+        let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
+        ROOMS[roomMTF]?.playerReady(playerName);
+        console.log(`${playerName} is ready`);
+        if (ROOMS[roomMTF].playersReady.length >= 2 && ROOMS[roomMTF].playersReady.length === ROOMS[roomMTF].players.length) {
+            console.log('game is starting');
+            //handle deck
+            //send new phase
+        }
+        else {
+            io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
+        }
     });
 });
 server.listen(PORT, () => {
