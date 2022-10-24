@@ -27,7 +27,7 @@ const formSubmit = (e: any) =>{
         <div className="title">
           <h2>Create a game room</h2>
           <h2>or</h2>
-          <h2>Connect to an existing game room</h2>
+          <h2>Join an existing game room</h2>
         </div>
         <div className="form-container">
           <div className="close-window" onClick={() => props.setTrigger(false)}>
@@ -40,7 +40,7 @@ const formSubmit = (e: any) =>{
             <input type="text" value={props.playerName} onChange={(e) => props.setName(e.target.value)}/>
             <div className="buttons">
             <button type="submit" className="btn" onClick={() => setType('create')}>Create</button>
-            <button type="submit" className="btn" onClick={() => setType('connect')}>Connect</button>
+            <button type="submit" className="btn" onClick={() => setType('connect')}>Join</button>
             </div>
           </form>
         </div>

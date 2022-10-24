@@ -29,12 +29,16 @@
     }
 }
 
-.ready-status{
+.ready-status {
     position: fixed;
-    top: 53%;
-    left: calc(50% - 130px);
-    width: 260px;
+    top: 40%;
+    left: calc(50% - 150px);
+    width: 300px;
     font-size: 20px;
     text-align: center;
     color: white;
+    .waiting-info {
+        margin-bottom: 45px;
+        font-size: 24px;
+    }
 }
