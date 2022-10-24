@@ -3,11 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.newDeck = exports.Deck = void 0;
 const SUITE = ["clubs", "hearts", "diamonds", "spades"];
 const VALUES = ["6", "7", "8", "9", "10", "jack", "queen", "king", "ace"];
-const Player1 = [];
-const Player2 = [];
-const Player3 = [];
-const Player4 = [];
-let Players = [Player1, Player2, Player3, Player4];
 class Deck {
     constructor(c) {
         this.cards = c;
@@ -20,14 +15,16 @@ class Deck {
             this.cards[index] = temp;
         }
     }
+    //the "top card" on the deck is pulled and defined as the Kozar
     kozar() {
         let Kozar = this.cards.shift();
         return Kozar;
     }
-    dealDeck(numberOfPlayers) {
-        for (let i = 0; i < numberOfPlayers; i++) {
+    //each player gets 6 cards
+    dealDeck(players) {
+        for (let i = 0; i < players.length; i++) {
             for (let j = 0; j < 6; j++) {
-                Players[i].push(this.cards.shift());
+                players[i].cards.push(this.cards.shift());
             }
         }
     }
@@ -41,22 +38,22 @@ class Card {
 }
 const makeDeck = () => {
     return SUITE.flatMap((suit) => {
-        return VALUES.map(value => {
+        return VALUES.map((value) => {
             return new Card(suit, value);
         });
     });
 };
-const newDeck = () => {
+const newDeck = (players) => {
     let deck = new Deck(makeDeck());
     deck.shuffle();
-    let sh = deck.kozar();
-    deck.dealDeck(4);
-    let MTF = {
-        players: Players,
-        kozar: sh,
-        deck: deck
+    let kozar = deck.kozar();
+    deck.dealDeck(players);
+    let result = {
+        players: players,
+        kozar: kozar,
+        deck: deck,
     };
-    return MTF;
+    return result;
 };
 exports.newDeck = newDeck;
 //# sourceMappingURL=Deck.js.map

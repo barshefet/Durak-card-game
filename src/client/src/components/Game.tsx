@@ -18,11 +18,16 @@ function Game(props: any) {
   const [attacker, setAttacker] = useState(false);
   const [contributer, setContributer] = useState(false);
   const [playerCards, setPlayerCards] = useState([]);
+  const [kozar, setkozar] = useState({suite: '', value: ''})
   const [roomReady, setRoomReady] = useState(false);
 
   socket.on("receive-mtf", (mtf) => {
+    let playerIndex = mtf.players.findIndex((element: any) => element.playerName === props.playerName)
+    
     setRoomReady(mtf.roomReady);
-    setPlayerCards(mtf.playerCards);
+    setPlayerCards(mtf.players[playerIndex].cards)
+    setkozar(mtf.kozar)
+    
   });
 
   return roomReady ? (
@@ -34,7 +39,7 @@ function Game(props: any) {
         defender={defender}
         contributer={contributer}
       />
-      <TableDeck />
+      <TableDeck kozar={kozar} />
       <Opponent />
       <AttackCards defender={defender} />
     </>

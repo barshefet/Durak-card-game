@@ -1,11 +1,11 @@
 import React from "react";
 
-const TableDeck = () => {
+const TableDeck = (props: any) => {
   return (
     <>
       <div className="deck">
       <div className="kozar">
-            <img className="card" src="images/hearts/8.svg" alt="8" />
+            <img className="card" src={`images/${props.kozar.suite}/${props.kozar.value}.svg`} alt="8" />
         </div>
         <div className="card-stack">
           <div className="card1">

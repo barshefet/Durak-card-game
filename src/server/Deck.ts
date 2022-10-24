@@ -1,71 +1,62 @@
 const SUITE = ["clubs", "hearts", "diamonds", "spades"];
 const VALUES = ["6", "7", "8", "9", "10", "jack", "queen", "king", "ace"];
-const Player1: Card[] = [] 
-const Player2: Card[] = []
-const Player3: Card[] = []
-const Player4: Card[] = []
-let Players: any[] = [Player1,Player2,Player3,Player4] 
 
 export class Deck {
-    cards
+  cards;
   constructor(c: any) {
     this.cards = c;
   }
 
-  shuffle(){
-    for(let index = 1; index < this.cards.length; index++){
-      let newIndex = Math.floor(Math.random() * (index + 1))
-      let temp = this.cards[newIndex]
-      this.cards[newIndex] = this.cards[index]  
-      this.cards[index] = temp
+  shuffle() {
+    for (let index = 1; index < this.cards.length; index++) {
+      let newIndex = Math.floor(Math.random() * (index + 1));
+      let temp = this.cards[newIndex];
+      this.cards[newIndex] = this.cards[index];
+      this.cards[index] = temp;
     }
   }
-
+  //the "top card" on the deck is pulled and defined as the Kozar
   kozar() {
-    let Kozar = this.cards.shift() 
-    return Kozar 
+    let Kozar = this.cards.shift();
+    return Kozar;
   }
 
-  dealDeck(numberOfPlayers: number) {
-    for (let i = 0; i < numberOfPlayers; i++){
-      for(let j = 0; j < 6; j++){
-        Players[i].push(this.cards.shift())
+  //each player gets 6 cards
+  dealDeck(players: any) {
+    for (let i = 0; i < players.length; i++) {
+      for (let j = 0; j < 6; j++) {
+        players[i].cards.push(this.cards.shift());
       }
     }
   }
 }
 
-
 class Card {
-    suite
-    value
+  suite;
+  value;
   constructor(suite: string, value: any) {
-    this.suite = suite
-    this.value = value
+    this.suite = suite;
+    this.value = value;
   }
 }
 
-
 const makeDeck = () => {
-    return SUITE.flatMap((suit) => {
-        return VALUES.map(value => {
-            return new Card(suit, value)
-        })
-    })
-}
+  return SUITE.flatMap((suit) => {
+    return VALUES.map((value) => {
+      return new Card(suit, value);
+    });
+  });
+};
 
-export const newDeck = () => {
-let deck = new Deck(makeDeck())
-deck.shuffle()
-let sh = deck.kozar()
-deck.dealDeck(4)
-let MTF = {
-  players: Players,
-  kozar: sh,
-  deck: deck
-}
-return MTF
-}
-
-
-
+export const newDeck = (players: any) => {
+  let deck = new Deck(makeDeck());
+  deck.shuffle();
+  let kozar = deck.kozar();
+  deck.dealDeck(players);
+  let result = {
+    players: players,
+    kozar: kozar,
+    deck: deck,
+  };
+  return result;
+};
