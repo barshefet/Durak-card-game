@@ -11,23 +11,28 @@ import "./GameComponents/Opponent/Opponent.scss";
 import AttackCards from "./GameComponents/AttackCards/AttackCards";
 import "./GameComponents/AttackCards/AttackCards.scss";
 import GameNotReady from "./GameComponents/GameNotReady/Ready";
+import GameInfo from "./GameComponents/GameInfo/GameInfo";
 import { socket } from "../service/socket";
 
 function Game(props: any) {
-  const [defender, setDefender] = useState(false);
+  const [defender, setDefender] = useState(true);
   const [attacker, setAttacker] = useState(false);
   const [contributer, setContributer] = useState(false);
   const [playerCards, setPlayerCards] = useState([]);
-  const [kozar, setkozar] = useState({suite: '', value: ''})
+  const [kozar, setkozar] = useState({ suite: "", value: "" });
   const [roomReady, setRoomReady] = useState(false);
+  const [attackCards, setAttackCards] = useState([]);
 
   socket.on("receive-mtf", (mtf) => {
-    let playerIndex = mtf.players.findIndex((element: any) => element.playerName === props.playerName)
-    
-    setRoomReady(mtf.roomReady);
-    setPlayerCards(mtf.players[playerIndex].cards)
-    setkozar(mtf.kozar)
-    
+    let playerIndex = mtf.players.findIndex(
+      (element: any) => element.playerName === props.playerName
+    );
+    if (playerIndex !== -1) {
+      setRoomReady(mtf.roomReady);
+      setPlayerCards(mtf.players[playerIndex].cards);
+      setkozar(mtf.kozar);
+      setAttackCards(mtf.attackCards);
+    } 
   });
 
   return roomReady ? (
@@ -41,13 +46,15 @@ function Game(props: any) {
       />
       <TableDeck kozar={kozar} />
       <Opponent />
-      <AttackCards defender={defender} />
+      <AttackCards defender={defender} attackCards={attackCards} />
+      <GameInfo roomID={props.roomID} playerName={props.playerName}/>
     </>
   ) : (
     <>
-    <Background />
-    <Opponent />
-    <GameNotReady roomID={props.roomID} playerName={props.playerName}/>
+      <Background />
+      <Opponent />
+      <GameNotReady roomID={props.roomID} playerName={props.playerName} />
+      <GameInfo roomID={props.roomID} playerName={props.playerName}/>
     </>
   );
 }

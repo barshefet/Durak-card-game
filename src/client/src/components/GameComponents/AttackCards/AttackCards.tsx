@@ -5,24 +5,11 @@ const AttackCards = (props: any) => {
     <>
       <div className="attack-cards-container">
         <div className="attack-cards">
+         {props.attackCards.map((card: { suite: any; value: any }) => (
           <div className="attack-card">
-            <img src="images/diamonds/10.svg" alt="" className="defender" />
+            <img src={`images/${card.suite}/${card.value}.svg`} alt="" className="defender" key={`${card.suite}${card.value}`} />
           </div>
-          <div className="attack-card">
-            <img src="images/spades/queen.svg" alt="" className="defender" />
-          </div>
-          <div className="attack-card">
-            <img src="images/diamonds/king.svg" alt="" className="defender" />
-          </div>
-          <div className="attack-card">
-            <img src="images/clubs/9.svg" alt="" className="defender" />
-          </div>
-          <div className="attack-card">
-            <img src="images/spades/king.svg" alt="" className="defender" />
-          </div>
-          <div className="attack-card">
-            <img src="images/hearts/8.svg" alt="" className="defender" />
-          </div>
+          ))}
         </div>
       </div>
     </>

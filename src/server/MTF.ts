@@ -11,6 +11,8 @@ export class MTF {
   roomID: string;
   kozar;
   deck;
+  attackCards
+  defenceCards
 
   constructor(
     roomID: string,
@@ -19,7 +21,9 @@ export class MTF {
     playersReady: any,
     phase: number,
     kozar: any,
-    deck: any
+    deck: any,
+    attackCards: any,
+    defenceCards:any
   ) {
     this.roomReady = roomReady;
     this.playersReady = playersReady;
@@ -28,6 +32,8 @@ export class MTF {
     this.players = players;
     this.kozar = kozar;
     this.deck = deck;
+    this.attackCards = attackCards
+    this.defenceCards = defenceCards
   }
 
   joinGame(playerName: string) {
