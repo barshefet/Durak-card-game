@@ -3,17 +3,28 @@
     img {
         height: 140px;
         -webkit-user-drag: none;
+        box-shadow: black 2px 2px 8px;
+
         
     }
+
+    .hide-input{
+        position: absolute;
+        left: -9999px;
+        // opacity: 0;
+    }
+
+
     .defender{
         &:hover{
             transform: scale(1.1);  
             cursor: pointer;
         }
         &:active{
-            outline: black solid 4px;
-        }
-    }
+            scale: 0.9;
+        }    }
+
+    
 }
 
 .attack-cards-container {
@@ -21,13 +32,22 @@
     top: 40%;
     left: 33%;
     .attack-cards {
+        form{
         display: flex;
+        flex-direction: row;
         justify-items: center;
         align-items: center;
         .attack-card {
             @include card();
-            
+            input[type="radio"]{
+                &:checked + label{
+                    img{
+                    outline: black solid 6px;
+                    }
+                }
+            }
         }
         
     }
+}
 }

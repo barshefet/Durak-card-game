@@ -20,7 +20,7 @@ function Game(props: any) {
   const [contributer, setContributer] = useState(false);
   const [playerCards, setPlayerCards] = useState([]);
   const [kozar, setkozar] = useState({ suite: "", value: "" });
-  const [roomReady, setRoomReady] = useState(false);
+  const [roomReady, setRoomReady] = useState(true);
   const [attackCards, setAttackCards] = useState([]);
 
   socket.on("receive-mtf", (mtf) => {

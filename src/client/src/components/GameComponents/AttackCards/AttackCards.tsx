@@ -1,14 +1,21 @@
-import React from "react";
-
+import React, { useState } from "react";
+// value and suite of clicked card
 const AttackCards = (props: any) => {
+  const [selected, setSelected] = useState(false);
+
   return props.defender ? (
     <>
       <div className="attack-cards-container">
         <div className="attack-cards">
-         {props.attackCards.map((card: { suite: any; value: any }) => (
-          <div className="attack-card">
-            <img src={`images/${card.suite}/${card.value}.svg`} alt="" className="defender" key={`${card.suite}${card.value}`} />
-          </div>
+          {props.attackCards.map((card: { suite: any; value: any }) => (
+            <div className="attack-card">
+              <img
+                src={`images/${card.suite}/${card.value}.svg`}
+                alt=""
+                className={selected ? "selected-defender" : "defender"}
+                key={`${card.suite}${card.value}`}
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -17,24 +24,39 @@ const AttackCards = (props: any) => {
     <>
       <div className="attack-cards-container">
         <div className="attack-cards">
-          <div className="attack-card">
-            <img src="images/diamonds/10.svg" alt="" />
-          </div>
-          <div className="attack-card">
-            <img src="images/spades/queen.svg" alt="" />
-          </div>
-          <div className="attack-card">
-            <img src="images/diamonds/king.svg" alt="" />
-          </div>
-          <div className="attack-card">
-            <img src="images/clubs/9.svg" alt="" />
-          </div>
-          <div className="attack-card">
-            <img src="images/spades/king.svg" alt="" />
-          </div>
-          <div className="attack-card">
-            <img src="images/hearts/8.svg" alt="" />
-          </div>
+          <form action="submit">
+            <div className="attack-card">
+              <input type="radio" name="a" id="1" className="hide-input" />
+              <label htmlFor="1">
+                <img
+                  src="images/diamonds/king.svg"
+                  alt=""
+                  className="defender"
+                />
+              </label>
+            </div>
+            <div className="attack-card">
+              <input type="radio" name="a" id="2" className="hide-input" />
+              <label htmlFor="2">
+                <img
+                  src="images/diamonds/king.svg"
+                  alt=""
+                  className="defender"
+                />
+              </label>
+            </div>
+
+            <div className="attack-card">
+              <input type="radio" name="a" id="3" className="hide-input" />
+              <label htmlFor="3">
+                <img
+                  src="images/clubs/7.svg"
+                  alt=""
+                  className="defender"
+                />
+              </label>
+            </div>
+          </form>
         </div>
       </div>
     </>
