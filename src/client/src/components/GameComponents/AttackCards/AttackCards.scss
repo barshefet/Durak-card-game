@@ -37,7 +37,7 @@
         flex-direction: row;
         justify-items: center;
         align-items: center;
-        .attack-card {
+        .attack-card-defender {
             @include card();
             input[type="radio"]{
                 &:checked + label{
@@ -46,6 +46,9 @@
                     }
                 }
             }
+        }
+        .attack-card{
+            @include card()
         }
         
     }

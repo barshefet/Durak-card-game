@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import './PlayerHand.scss';
+
 
 const PlayerHand = (props: any) => {
   return (

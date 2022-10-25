@@ -1,4 +1,6 @@
 import React from "react";
+import "./TableDeck.scss";
+
 
 const TableDeck = (props: any) => {
   return (

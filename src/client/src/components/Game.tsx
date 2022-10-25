@@ -1,15 +1,9 @@
 import React, { useState } from "react";
 import Background from "./GameComponents/background/background";
 import PlayerHand from "./GameComponents/PlayerHand/PlayerHand";
-import "./GameComponents/background/background.scss";
-import "./GameComponents/PlayerHand/PlayerHand.scss";
-import "./GameComponents/ReturnButton/ReturnButton.scss";
-import "./GameComponents/Deck/TableDeck.scss";
 import TableDeck from "./GameComponents/Deck/TableDeck";
 import Opponent from "./GameComponents/Opponent/Opponent";
-import "./GameComponents/Opponent/Opponent.scss";
 import AttackCards from "./GameComponents/AttackCards/AttackCards";
-import "./GameComponents/AttackCards/AttackCards.scss";
 import GameNotReady from "./GameComponents/GameNotReady/Ready";
 import GameInfo from "./GameComponents/GameInfo/GameInfo";
 import { socket } from "../service/socket";
@@ -22,6 +16,8 @@ function Game(props: any) {
   const [kozar, setkozar] = useState({ suite: "", value: "" });
   const [roomReady, setRoomReady] = useState(true);
   const [attackCards, setAttackCards] = useState([]);
+  const [tableSelectedCard, setTableSelectedCard] = useState({ suite: "", value: "" });
+
 
   socket.on("receive-mtf", (mtf) => {
     let playerIndex = mtf.players.findIndex(
@@ -46,7 +42,7 @@ function Game(props: any) {
       />
       <TableDeck kozar={kozar} />
       <Opponent />
-      <AttackCards defender={defender} attackCards={attackCards} />
+      <AttackCards defender={defender} attackCards={attackCards} setSelectedCard={setTableSelectedCard}/>
       <GameInfo roomID={props.roomID} playerName={props.playerName}/>
     </>
   ) : (

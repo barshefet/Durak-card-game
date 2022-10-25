@@ -1,5 +1,6 @@
 import React from "react";
 import ReturnButton from "../ReturnButton/ReturnButton";
+import './background.scss'
 
 
 const Background = () => {

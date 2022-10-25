@@ -1,9 +1,11 @@
 import React from "react";
+import './Opponent.scss'
 
-const Opponent = () => {
+const Opponent = (props:any) => {
   return (
     <>
       <div className="opponent">
+        <div className="player-name"><h3>Bar</h3></div>
         <div className="pic">
           <img src="images/opponent/pic.svg" alt="" />
           <div className="status-attack"><img src="images/opponent/attack.svg" alt=""  /></div>
