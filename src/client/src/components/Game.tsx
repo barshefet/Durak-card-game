@@ -9,26 +9,35 @@ import GameInfo from "./GameComponents/GameInfo/GameInfo";
 import { socket } from "../service/socket";
 
 function Game(props: any) {
+  const [playerIndex, setPlayerIndex] = useState(0);
   const [defender, setDefender] = useState(true);
   const [attacker, setAttacker] = useState(false);
   const [contributer, setContributer] = useState(false);
   const [playerCards, setPlayerCards] = useState([]);
   const [kozar, setkozar] = useState({ suite: "", value: "" });
-  const [roomReady, setRoomReady] = useState(true);
+  const [roomReady, setRoomReady] = useState(false);
   const [attackCards, setAttackCards] = useState([]);
-  const [tableSelectedCard, setTableSelectedCard] = useState({ suite: "", value: "" });
-
+  const [tableSelectedCard, setTableSelectedCard] = useState({
+    suite: "",
+    value: "",
+  });
+  const [players, setPlayers] = useState([]);
+  const [playersReady, setPlayersReady] = useState([]);
 
   socket.on("receive-mtf", (mtf) => {
-    let playerIndex = mtf.players.findIndex(
+    let index = mtf.players.findIndex(
       (element: any) => element.playerName === props.playerName
     );
     if (playerIndex !== -1) {
+      setPlayerIndex(playerIndex);
       setRoomReady(mtf.roomReady);
-      setPlayerCards(mtf.players[playerIndex].cards);
+      setPlayerCards(mtf.players[index].cards);
       setkozar(mtf.kozar);
       setAttackCards(mtf.attackCards);
-    } 
+      setPlayers(mtf.players);
+      setPlayersReady(mtf.playersReady);
+    }
+    //else request again the mtf
   });
 
   return roomReady ? (
@@ -41,16 +50,30 @@ function Game(props: any) {
         contributer={contributer}
       />
       <TableDeck kozar={kozar} />
-      <Opponent />
-      <AttackCards defender={defender} attackCards={attackCards} setSelectedCard={setTableSelectedCard}/>
-      <GameInfo roomID={props.roomID} playerName={props.playerName}/>
+      <Opponent
+        gameReady={roomReady}
+        players={players}
+        playersReady={playersReady}
+        playerIndex={playerIndex}
+      />
+      <AttackCards
+        defender={defender}
+        attackCards={attackCards}
+        setSelectedCard={setTableSelectedCard}
+      />
+      <GameInfo roomID={props.roomID} playerName={props.playerName} />
     </>
   ) : (
     <>
       <Background />
-      <Opponent />
+      <Opponent
+        gameReady={roomReady}
+        players={players}
+        playersReady={playersReady}
+        playerIndex={playerIndex}
+      />
       <GameNotReady roomID={props.roomID} playerName={props.playerName} />
-      <GameInfo roomID={props.roomID} playerName={props.playerName}/>
+      <GameInfo roomID={props.roomID} playerName={props.playerName} />
     </>
   );
 }

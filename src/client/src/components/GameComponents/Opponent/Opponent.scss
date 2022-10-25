@@ -10,26 +10,41 @@
         height: 40px;
         width: 40px;
         -webkit-user-drag: none;
-
     }
 }
 
-.opponent {
+@mixin opponent-ready {
+    display: flex;
+        justify-content: center;
+        align-items: center;
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 85px;
+            height: 50px;
+            outline: black solid 2px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            h2{
+                text-align: center;
+            }
+        }
+}
+
+@mixin opponent {
     position: absolute;
-    top: 10%;
-    left: 67%;
     z-index: 20;
     background-color: rgba(128, 128, 128, 0.458);
     border-radius: 10px;
-    width: fit-content;
+    width: 235px;
     box-shadow: 0px 0px 5px rgb(42, 42, 42);
 
-    .player-name{
-        h3{
+    .player-name {
+        h3 {
             margin-top: 5px;
             margin-bottom: 0;
             text-align: center;
-
         }
     }
 
@@ -42,19 +57,18 @@
             height: 100px;
             margin: 5px;
             -webkit-user-drag: none;
-
         }
         .status-attack {
             background-color: rgba(147, 67, 67, 0.5);
             @include status();
         }
-        .status-defend{
+        .status-defend {
             background-color: rgba(76, 194, 76, 0.5);
-            @include status()
+            @include status();
         }
-        .status-support{
+        .status-support {
             background-color: rgba(255, 255, 0, 0.5);
-            @include status()
+            @include status();
         }
     }
 
@@ -68,8 +82,47 @@
                 margin-left: 2px;
                 margin-right: 2px;
                 -webkit-user-drag: none;
-
             }
         }
     }
+
+    .opponent-ready-status {
+        @include opponent-ready();
+        div{
+            background-color: green;
+        }
+    }
+    .opponent-notready-status{
+        @include opponent-ready();
+        div{
+            background-color: red;
+        }
+    }
 }
+
+.opponent1{
+    @include opponent();
+    top:40%;
+    left: calc(74% - 117.5px)
+}
+
+.opponent2{
+    @include opponent();
+    top: 7%;
+    left: calc(69% - 117.5px);
+}
+
+.opponent3{
+    @include opponent();
+    top: 7%;
+    left: calc(31% - 117.5px);
+}
+
+.opponent4{
+    @include opponent();
+    top: 40%;
+    left: calc(26% - 117.5px);
+}
+
+
+
