@@ -1,6 +1,7 @@
 //this is the MTF - master track file. all the data of the game is gathered here and is sent to all the players
 //in that way all players table and cards are in sync.
 
+import { Card } from "./Deck";
 import { Player } from "./Player";
 
 export class MTF {
@@ -10,9 +11,9 @@ export class MTF {
   phase: number;
   roomID: string;
   kozar;
-  deck;
-  attackCards;
-  defenceCards;
+  deck: Card[];
+  attackCards: Card[];
+  defenceCards: Card[];
   attacker;
   defender;
   turnCounter;
@@ -50,8 +51,51 @@ export class MTF {
     this.players.push(player);
   }
 
-  playerReady(playerName: string) {
-    this.playersReady.push(playerName);
+  playerReady(name: string) {
+    let index = this.players.findIndex((player) => player.playerName === name);
+    this.players[index].isReady = true;
+    this.playersReady.push(name);
+  }
+
+  setAttacker(name: string) {
+    if (this.attacker !== undefined) {
+      let index1 = this.players.findIndex(
+        (player) => player.playerName === this.attacker
+      );
+      this.players[index1].isAttacker = false;
+    }
+    let index2 = this.players.findIndex((player) => player.playerName === name);
+    this.players[index2].isAttacker = true;
+    this.attacker = name;
+  }
+
+  setDefender(name: string) {
+    if (this.defender !== undefined) {
+      let index1 = this.players.findIndex(
+        (player) => player.playerName === this.defender
+      );
+      this.players[index1].isDefender = false;
+    }
+    let index = this.players.findIndex((player) => player.playerName === name);
+    this.players[index].isDefender = true;
+    this.defender = name;
+  }
+
+  setCounter() {
+    if(this.turnCounter === this.players.length - 1){
+      this.turnCounter = 0
+    }else{
+      this.turnCounter++
+    }
+  }
+
+  addDefenceCard(card: Card) {
+    this.defenceCards.push(card)
+  }
+
+  attack(cardindex: number, playerIndex: number) {
+    let card: Card[] = this.players[playerIndex].cards.splice(cardindex, 1)
+    this.attackCards.push(card[0])
   }
 
   startGame(deck: any) {
@@ -60,8 +104,8 @@ export class MTF {
     this.deck = deck.deck;
     this.phase = 1;
     this.roomReady = true;
-    this.attacker = this.players[0].playerName;
-    this.defender = this.players[1].playerName;
+    this.setAttacker(this.players[0].playerName);
+    this.setDefender(this.players[1].playerName);
     this.turnCounter = 1;
   }
 
@@ -69,6 +113,8 @@ export class MTF {
     this.phase = 1;
     this.attacker = this.players[this.turnCounter].playerName;
     this.defender = this.players[this.turnCounter + 1].playerName;
-    this.turnCounter++;//need refining
+    this.setCounter
   }
+
+
 }

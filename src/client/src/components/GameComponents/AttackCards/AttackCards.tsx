@@ -3,6 +3,8 @@ import './AttackCards.scss'
 // value and suite of clicked card
 const AttackCards = (props: any) => {
 
+  
+
   return props.defender ? (
     <>
       <div className="attack-cards-container">

@@ -23,8 +23,36 @@ class MTF {
         let player = new Player_1.Player(playerName, []);
         this.players.push(player);
     }
-    playerReady(playerName) {
-        this.playersReady.push(playerName);
+    playerReady(name) {
+        let index = this.players.findIndex((player) => player.playerName === name);
+        this.players[index].isReady = true;
+        this.playersReady.push(name);
+    }
+    setAttacker(name) {
+        if (this.attacker !== undefined) {
+            let index1 = this.players.findIndex((player) => player.playerName === this.attacker);
+            this.players[index1].isAttacker = false;
+        }
+        let index2 = this.players.findIndex((player) => player.playerName === name);
+        this.players[index2].isAttacker = true;
+        this.attacker = name;
+    }
+    setDefender(name) {
+        if (this.defender !== undefined) {
+            let index1 = this.players.findIndex((player) => player.playerName === this.defender);
+            this.players[index1].isDefender = false;
+        }
+        let index = this.players.findIndex((player) => player.playerName === name);
+        this.players[index].isDefender = true;
+        this.defender = name;
+    }
+    setCounter() {
+        if (this.turnCounter === this.players.length - 1) {
+            this.turnCounter = 0;
+        }
+        else {
+            this.turnCounter++;
+        }
     }
     startGame(deck) {
         this.players = deck.players;
@@ -32,15 +60,15 @@ class MTF {
         this.deck = deck.deck;
         this.phase = 1;
         this.roomReady = true;
-        this.attacker = this.players[0].playerName;
-        this.defender = this.players[1].playerName;
+        this.setAttacker(this.players[0].playerName);
+        this.setDefender(this.players[1].playerName);
         this.turnCounter = 1;
     }
     newRound() {
         this.phase = 1;
         this.attacker = this.players[this.turnCounter].playerName;
         this.defender = this.players[this.turnCounter + 1].playerName;
-        this.turnCounter++; //need refining
+        this.setCounter;
     }
 }
 exports.MTF = MTF;

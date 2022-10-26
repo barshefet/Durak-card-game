@@ -96,29 +96,30 @@
         @include opponent-ready();
         div{
             background-color: red;
+            height: 70px
         }
     }
 }
 
-.opponent1{
+.opponent4{
     @include opponent();
     top:40%;
     left: calc(74% - 117.5px)
 }
 
-.opponent2{
+.opponent3{
     @include opponent();
     top: 7%;
     left: calc(69% - 117.5px);
 }
 
-.opponent3{
+.opponent2{
     @include opponent();
     top: 7%;
     left: calc(31% - 117.5px);
 }
 
-.opponent4{
+.opponent1{
     @include opponent();
     top: 40%;
     left: calc(26% - 117.5px);

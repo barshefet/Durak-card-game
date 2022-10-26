@@ -60,6 +60,10 @@ io.on("connection", (socket) => {
             io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
         }
     });
+    socket.on('re-send', (ID) => {
+        let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
+        io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
+    });
 });
 server.listen(PORT, () => {
     console.log(`listening on port: ${PORT}`);

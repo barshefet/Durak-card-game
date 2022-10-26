@@ -1,8 +1,8 @@
 import React from "react";
 import { Player } from "../../../models/player.model";
 
-const IsDefender = (props: any) => {
-    return (props.player as Player).isDefender ? (
+const IsDefender = (props: Partial <Player>) => {
+    return props.isDefender ? (
         <>
         <div className={"status-defend"}>
             <img src="images/opponent/defend.svg" alt="" />

@@ -3,5 +3,6 @@ export interface Player {
     cards: any[];
     isAttacker: boolean
     isDefender: boolean
+    isReady: boolean
   }
   

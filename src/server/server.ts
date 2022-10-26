@@ -66,6 +66,18 @@ io.on("connection", (socket: any) => {
       io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
     }
   });
+
+  socket.on('re-send', (ID: string) => {
+    let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
+    io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
+
+  })
+
+  socket.on('attack', (ID :string, cardIndex: number, playerIndex: number) => {
+    let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
+    ROOMS[roomMTF].attack(cardIndex, playerIndex)
+    io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
+  })
 });
 
 server.listen(PORT, () => {

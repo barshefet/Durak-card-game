@@ -31,7 +31,7 @@ export class Deck {
   }
 }
 
-class Card {
+export class Card {
   suite;
   value;
   constructor(suite: string, value: any) {
