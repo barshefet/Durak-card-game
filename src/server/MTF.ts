@@ -82,20 +82,20 @@ export class MTF {
   }
 
   setCounter() {
-    if(this.turnCounter === this.players.length - 1){
-      this.turnCounter = 0
-    }else{
-      this.turnCounter++
+    if (this.turnCounter === this.players.length - 1) {
+      this.turnCounter = 0;
+    } else {
+      this.turnCounter++;
     }
   }
 
   addDefenceCard(card: Card) {
-    this.defenceCards.push(card)
+    this.defenceCards.push(card);
   }
 
   attack(cardindex: number, playerIndex: number) {
-    let card: Card[] = this.players[playerIndex].cards.splice(cardindex, 1)
-    this.attackCards.push(card[0])
+    let card: Card[] = this.players[playerIndex].cards.splice(cardindex, 1);
+    this.attackCards.push(card[0]);
   }
 
   startGame(deck: any) {
@@ -113,8 +113,14 @@ export class MTF {
     this.phase = 1;
     this.attacker = this.players[this.turnCounter].playerName;
     this.defender = this.players[this.turnCounter + 1].playerName;
-    this.setCounter
+    this.setCounter;
   }
 
-
+  nextPhase() {
+    if (this.attackCards.length < 6) {
+      this.phase = 2;
+    } else {
+      this.phase = 3;
+    }
+  }
 }

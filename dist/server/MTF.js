@@ -54,6 +54,13 @@ class MTF {
             this.turnCounter++;
         }
     }
+    addDefenceCard(card) {
+        this.defenceCards.push(card);
+    }
+    attack(cardindex, playerIndex) {
+        let card = this.players[playerIndex].cards.splice(cardindex, 1);
+        this.attackCards.push(card[0]);
+    }
     startGame(deck) {
         this.players = deck.players;
         this.kozar = deck.kozar;
@@ -69,6 +76,14 @@ class MTF {
         this.attacker = this.players[this.turnCounter].playerName;
         this.defender = this.players[this.turnCounter + 1].playerName;
         this.setCounter;
+    }
+    nextPhase() {
+        if (this.attackCards.length < 6) {
+            this.phase = 2;
+        }
+        else {
+            this.phase = 3;
+        }
     }
 }
 exports.MTF = MTF;

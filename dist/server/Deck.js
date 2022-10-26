@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.newDeck = exports.Deck = void 0;
+exports.newDeck = exports.Card = exports.Deck = void 0;
 const SUITE = ["clubs", "hearts", "diamonds", "spades"];
 const VALUES = ["6", "7", "8", "9", "10", "jack", "queen", "king", "ace"];
 class Deck {
@@ -36,6 +36,7 @@ class Card {
         this.value = value;
     }
 }
+exports.Card = Card;
 const makeDeck = () => {
     return SUITE.flatMap((suit) => {
         return VALUES.map((value) => {

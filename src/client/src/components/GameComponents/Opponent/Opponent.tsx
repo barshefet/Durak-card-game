@@ -24,9 +24,9 @@ const Opponent = (props: any) => {
     }
   };
 
-  useEffect(() => {
-    console.log('players have changed')
-  }, [props.player]);
+  // useEffect(() => {
+  //   console.log('players have changed')
+  // }, [props.player]);
 
   return props.gameReady ? (
     <>

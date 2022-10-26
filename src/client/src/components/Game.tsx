@@ -9,12 +9,13 @@ import GameInfo from "./GameComponents/GameInfo/GameInfo";
 import { socket } from "../service/socket";
 import { MTF } from "../models/MTF.model";
 import { Player } from "../models/player.model";
+import { Card } from "../models/cards.model";
 
 function Game(props: any) {
   const [playerIndex, setPlayerIndex] = useState(0);
   const [defender, setDefender] = useState(false);
   const [attacker, setAttacker] = useState(false);
-  const [playerCards, setPlayerCards] = useState<Array<Player>>([]);
+  const [playerCards, setPlayerCards] = useState<Card[]>([]);
   const [kozar, setkozar] = useState({ suite: "", value: "" });
   const [roomReady, setRoomReady] = useState(false);
   const [attackCards, setAttackCards] = useState([]);
@@ -24,7 +25,6 @@ function Game(props: any) {
   });
   const [phase, setPhase] = useState(0)
   const [Players, setPlayers] = useState<Player[]>([]);
-  const [playersReady, setPlayersReady] = useState([]);
 
   const reSend = () => {
     socket.emit("re-send", props.roomID);
@@ -43,12 +43,11 @@ function Game(props: any) {
       setPlayerCards(mtf.players[index].cards);
       setkozar(mtf.kozar);
       setAttackCards(mtf.attackCards);
-      setPlayersReady(mtf.playersReady);
       setAttacker(mtf.players[index].isAttacker)
       setDefender(mtf.players[index].isDefender)
+      setPhase(mtf.phase)
       
     }
-    //else request again the mtf
   });
 
   return roomReady ? (
@@ -61,6 +60,8 @@ function Game(props: any) {
         playerIndex={playerIndex}
         phase={phase}
         roomID={props.roomID}
+        players={Players}
+        attackCards={attackCards}
       />
       <TableDeck kozar={kozar} />
       <Opponent

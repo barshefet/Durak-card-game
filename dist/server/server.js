@@ -64,6 +64,12 @@ io.on("connection", (socket) => {
         let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
         io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
     });
+    socket.on('attack', (ID, cardIndex, playerIndex) => {
+        let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
+        ROOMS[roomMTF].attack(cardIndex, playerIndex);
+        ROOMS[roomMTF].nextPhase();
+        io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
+    });
 });
 server.listen(PORT, () => {
     console.log(`listening on port: ${PORT}`);

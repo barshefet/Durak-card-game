@@ -76,6 +76,7 @@ io.on("connection", (socket: any) => {
   socket.on('attack', (ID :string, cardIndex: number, playerIndex: number) => {
     let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
     ROOMS[roomMTF].attack(cardIndex, playerIndex)
+    ROOMS[roomMTF].nextPhase()
     io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
   })
 });
