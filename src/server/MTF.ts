@@ -11,10 +11,11 @@ export class MTF {
   roomID: string;
   kozar;
   deck;
-  attackCards
-  defenceCards
-  attacker
-  defender
+  attackCards;
+  defenceCards;
+  attacker;
+  defender;
+  turnCounter;
 
   constructor(
     roomID: string,
@@ -25,9 +26,10 @@ export class MTF {
     kozar: any,
     deck: any,
     attackCards: any,
-    defenceCards:any,
+    defenceCards: any,
     attacker: any,
-    defender: any
+    defender: any,
+    turnCounter: any
   ) {
     this.roomReady = roomReady;
     this.playersReady = playersReady;
@@ -36,10 +38,11 @@ export class MTF {
     this.players = players;
     this.kozar = kozar;
     this.deck = deck;
-    this.attackCards = attackCards
-    this.defenceCards = defenceCards
-    this.attacker = attacker
-    this.defender = defender
+    this.attackCards = attackCards;
+    this.defenceCards = defenceCards;
+    this.attacker = attacker;
+    this.defender = defender;
+    this.turnCounter = turnCounter;
   }
 
   joinGame(playerName: string) {
@@ -57,5 +60,15 @@ export class MTF {
     this.deck = deck.deck;
     this.phase = 1;
     this.roomReady = true;
+    this.attacker = this.players[0].playerName;
+    this.defender = this.players[1].playerName;
+    this.turnCounter = 1;
+  }
+
+  newRound() {
+    this.phase = 1;
+    this.attacker = this.players[this.turnCounter].playerName;
+    this.defender = this.players[this.turnCounter + 1].playerName;
+    this.turnCounter++;//need refining
   }
 }

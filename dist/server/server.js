@@ -22,7 +22,7 @@ io.on("connection", (socket) => {
     console.log(`client connected`);
     socket.on("create-room", (roomID, playerName) => {
         socket.join(roomID);
-        let mtf = new MTF_1.MTF(roomID, false, [], [], 0, undefined, undefined, [], []);
+        let mtf = new MTF_1.MTF(roomID, false, [], [], 0, undefined, undefined, [], [], undefined, undefined, undefined);
         mtf.joinGame(playerName);
         ROOMS.push(mtf);
         io.to(roomID).emit("receive-mtf", mtf);

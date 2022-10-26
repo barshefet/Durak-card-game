@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MTF = void 0;
 const Player_1 = require("./Player");
 class MTF {
-    constructor(roomID, roomReady, players, playersReady, phase, kozar, deck, attackCards, defenceCards) {
+    constructor(roomID, roomReady, players, playersReady, phase, kozar, deck, attackCards, defenceCards, attacker, defender, turnCounter) {
         this.roomReady = roomReady;
         this.playersReady = playersReady;
         this.phase = phase;
@@ -15,6 +15,9 @@ class MTF {
         this.deck = deck;
         this.attackCards = attackCards;
         this.defenceCards = defenceCards;
+        this.attacker = attacker;
+        this.defender = defender;
+        this.turnCounter = turnCounter;
     }
     joinGame(playerName) {
         let player = new Player_1.Player(playerName, []);
@@ -29,6 +32,15 @@ class MTF {
         this.deck = deck.deck;
         this.phase = 1;
         this.roomReady = true;
+        this.attacker = this.players[0].playerName;
+        this.defender = this.players[1].playerName;
+        this.turnCounter = 1;
+    }
+    newRound() {
+        this.phase = 1;
+        this.attacker = this.players[this.turnCounter].playerName;
+        this.defender = this.players[this.turnCounter + 1].playerName;
+        this.turnCounter++; //need refining
     }
 }
 exports.MTF = MTF;

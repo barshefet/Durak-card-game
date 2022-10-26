@@ -7,13 +7,15 @@ import AttackCards from "./GameComponents/AttackCards/AttackCards";
 import GameNotReady from "./GameComponents/GameNotReady/Ready";
 import GameInfo from "./GameComponents/GameInfo/GameInfo";
 import { socket } from "../service/socket";
+import { MTF } from "../models/MTF.model";
+import { Player } from "../models/player.model";
 
 function Game(props: any) {
   const [playerIndex, setPlayerIndex] = useState(0);
   const [defender, setDefender] = useState(true);
   const [attacker, setAttacker] = useState(false);
   const [contributer, setContributer] = useState(false);
-  const [playerCards, setPlayerCards] = useState([]);
+  const [playerCards, setPlayerCards] = useState<Array<Player>>([]);
   const [kozar, setkozar] = useState({ suite: "", value: "" });
   const [roomReady, setRoomReady] = useState(false);
   const [attackCards, setAttackCards] = useState([]);
@@ -21,20 +23,26 @@ function Game(props: any) {
     suite: "",
     value: "",
   });
-  const [players, setPlayers] = useState([]);
+  const [Players, setPlayers] = useState<any[]>([]);
   const [playersReady, setPlayersReady] = useState([]);
 
-  socket.on("receive-mtf", (mtf) => {
+  const reSend = () => {
+    socket.emit("re-send");
+  };
+
+  socket.on("receive-mtf", (mtf: MTF) => {
     let index = mtf.players.findIndex(
       (element: any) => element.playerName === props.playerName
     );
-    if (playerIndex !== -1) {
-      setPlayerIndex(playerIndex);
+    setPlayerIndex(index);
+
+    if (index !== -1) {
+      console.log(mtf)
       setRoomReady(mtf.roomReady);
+      setPlayers(mtf.players)     
       setPlayerCards(mtf.players[index].cards);
       setkozar(mtf.kozar);
       setAttackCards(mtf.attackCards);
-      setPlayers(mtf.players);
       setPlayersReady(mtf.playersReady);
     }
     //else request again the mtf
@@ -52,7 +60,7 @@ function Game(props: any) {
       <TableDeck kozar={kozar} />
       <Opponent
         gameReady={roomReady}
-        players={players}
+        players={Players}
         playersReady={playersReady}
         playerIndex={playerIndex}
       />
@@ -68,7 +76,7 @@ function Game(props: any) {
       <Background />
       <Opponent
         gameReady={roomReady}
-        players={players}
+        players={Players}
         playersReady={playersReady}
         playerIndex={playerIndex}
       />
