@@ -10,7 +10,7 @@
             transform: rotate(90deg);
             height: 130px;
             -webkit-user-drag: none;
-            box-shadow: black 1px 1px 1px;
+            box-shadow: black 1px 1px 8px;
         }
     }
     .card-stack {
@@ -19,6 +19,8 @@
             top: 0;
             left: 0;
             z-index: 1;
+            
+            
         }
         .card2 {
             position: absolute;

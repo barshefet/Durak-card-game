@@ -3,6 +3,7 @@
 //in that way all players table and cards are in sync.
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MTF = void 0;
+const DefenceCard_1 = require("./DefenceCard");
 const Player_1 = require("./Player");
 class MTF {
     constructor(roomID, roomReady, players, playersReady, phase, kozar, deck, attackCards, defenceCards, attacker, defender, turnCounter) {
@@ -54,16 +55,14 @@ class MTF {
             this.turnCounter++;
         }
     }
-    addDefenceCard(card) {
-        this.defenceCards.push(card);
-    }
     attack(cardindex, playerIndex) {
         let card = this.players[playerIndex].cards.splice(cardindex, 1);
         this.attackCards.push(card[0]);
     }
     defend(cardindex, playerIndex) {
         let card = this.players[playerIndex].cards.splice(cardindex, 1);
-        this.defenceCards.push(card[0]);
+        let defenceCard = new DefenceCard_1.DefenceCard(cardindex, card[0]);
+        this.defenceCards.push(defenceCard);
     }
     startGame(deck) {
         this.players = deck.players;
@@ -88,6 +87,14 @@ class MTF {
         else {
             this.phase = 3;
         }
+    }
+    giveUp() {
+        let defenderIndex = this.players.findIndex((player) => player.playerName = this.defender);
+        this.attackCards.forEach((card) => this.players[defenderIndex].cards.push(card));
+        this.defenceCards.forEach((defenceCard) => this.players[defenderIndex].cards.push(defenceCard.card));
+        this.attackCards.splice(0, this.attackCards.length);
+        this.defenceCards.splice(0, this.defenceCards.length);
+        this.newRound();
     }
 }
 exports.MTF = MTF;

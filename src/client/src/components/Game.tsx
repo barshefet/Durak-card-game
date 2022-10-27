@@ -11,6 +11,7 @@ import { MTF } from "../models/MTF.model";
 import { Player } from "../models/player.model";
 import { Card } from "../models/cards.model";
 import DefenseCards from "./GameComponents/DefenceCards/DefenseCards";
+import { DefenceCard } from "../models/defenceCards.model";
 
 function Game(props: any) {
   const [playerIndex, setPlayerIndex] = useState(0);
@@ -20,6 +21,7 @@ function Game(props: any) {
   const [kozar, setkozar] = useState({ suite: "", value: "" });
   const [roomReady, setRoomReady] = useState(false);
   const [attackCards, setAttackCards] = useState([]);
+  const [defenceCards, setDefenceCards] = useState<DefenceCard[]>([])
   const [tableSelectedCard, setTableSelectedCard] = useState({
     suite: "",
     value: "",
@@ -47,6 +49,7 @@ function Game(props: any) {
       setAttacker(mtf.players[index].isAttacker)
       setDefender(mtf.players[index].isDefender)
       setPhase(mtf.phase)
+      setDefenceCards(mtf.defenceCards)
       
     }
   });
@@ -75,7 +78,7 @@ function Game(props: any) {
         attackCards={attackCards}
         setSelectedCard={setTableSelectedCard}
       />
-      <DefenseCards />
+      <DefenseCards defenceCards={defenceCards} />
       <GameInfo roomID={props.roomID} playerName={props.playerName} />
     </>
   ) : (

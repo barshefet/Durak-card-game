@@ -2,6 +2,7 @@
 //in that way all players table and cards are in sync.
 
 import { Card } from "./Deck";
+import { DefenceCard } from "./DefenceCard";
 import { Player } from "./Player";
 
 export class MTF {
@@ -10,13 +11,13 @@ export class MTF {
   playersReady;
   phase: number;
   roomID: string;
-  kozar;
+  kozar: Card;
   deck: Card[];
   attackCards: Card[];
-  defenceCards: Card[];
+  defenceCards: DefenceCard[];
   attacker;
   defender;
-  turnCounter;
+  turnCounter: number;
 
   constructor(
     roomID: string,
@@ -89,10 +90,6 @@ export class MTF {
     }
   }
 
-  addDefenceCard(card: Card) {
-    this.defenceCards.push(card);
-  }
-
   attack(cardindex: number, playerIndex: number) {
     let card: Card[] = this.players[playerIndex].cards.splice(cardindex, 1);
     this.attackCards.push(card[0]);
@@ -100,7 +97,8 @@ export class MTF {
 
   defend(cardindex: number, playerIndex: number) {
     let card: Card[] = this.players[playerIndex].cards.splice(cardindex, 1);
-    this.defenceCards.push(card[0]);
+    let defenceCard = new DefenceCard(cardindex, card[0])
+    this.defenceCards.push(defenceCard);
   }
 
   startGame(deck: any) {
@@ -127,5 +125,15 @@ export class MTF {
     } else {
       this.phase = 3;
     }
+  }
+
+  giveUp() {
+    let defenderIndex = this.players.findIndex((player) => player.playerName = this.defender)
+    this.attackCards.forEach((card: Card) => this.players[defenderIndex].cards.push(card))
+    this.defenceCards.forEach((defenceCard: DefenceCard) => this.players[defenderIndex].cards.push(defenceCard.card))
+    this.attackCards.splice(0,this.attackCards.length)
+    this.defenceCards.splice(0, this.defenceCards.length)
+    this.newRound()
+
   }
 }

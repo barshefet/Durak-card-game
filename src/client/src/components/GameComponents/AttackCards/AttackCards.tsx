@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './AttackCards.scss'
 // value and suite of clicked card
 const AttackCards = (props: any) => {
-
   
 
   return props.defender ? (
@@ -11,15 +10,15 @@ const AttackCards = (props: any) => {
         <div className="attack-cards">
           <form action="submit">
             {props.attackCards.map((card: { suite: any; value: any }) => (
-              <div className="attack-card-defender">
+              <div className="attack-card-defender" key={`${card.suite}${card.value}11`} >
                 <input
                   type="radio"
                   name="a"
                   id={`${card.suite}${card.value}`}
                   className="hide-input"
-                  key={`${card.suite}${card.value}1`}
+                  key={`${card.suite}${card.value}22`}
                 />
-                <label htmlFor="1" key={`${card.suite}${card.value}2`}>
+                <label htmlFor="1" key={`${card.suite}${card.value}33`}>
                   <img
                     src={`images/${card.suite}/${card.value}.svg`}
                     alt=""

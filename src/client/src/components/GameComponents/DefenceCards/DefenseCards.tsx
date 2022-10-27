@@ -1,33 +1,30 @@
-import React from 'react'
-import './DefenceCards.scss'
+import React from "react";
+import { DefenceCard } from "../../../models/defenceCards.model";
+import "./DefenceCards.scss";
 
-const DefenseCards = () => {
+const DefenseCards = (props: any) => {
   return (
     <>
-    <div className='defence-container'>
-    <div className='defence-cards'>
-      <div className='defence-card1'>
-        <img src="images/diamonds/7.svg" alt="" />
+      <div className="defence-container">
+        <div className="defence-cards">
+          {(props.defenceCards as DefenceCard[]).map(
+            (defenceCard: DefenceCard) => (
+              <div
+                className={`defence-card${defenceCard.index}`}
+                key={`defenceCard1:${defenceCard.card.suite}${defenceCard.card.value}`}
+              >
+                <img
+                  src={`images/${defenceCard.card.suite}/${defenceCard.card.value}.svg`}
+                  alt=""
+                  key={`defenceCard2:${defenceCard.card.suite}${defenceCard.card.value}`}
+                />
+              </div>
+            )
+          )}
+        </div>
       </div>
-      <div className='defence-card2'>
-        <img src="images/diamonds/king.svg" alt="" />
-      </div>
-      <div className='defence-card3'>
-        <img src="images/diamonds/jack.svg" alt="" />
-      </div>
-      <div className='defence-card4'>
-        <img src="images/diamonds/jack.svg" alt="" />
-      </div>
-      <div className='defence-card5'>
-        <img src="images/diamonds/jack.svg" alt="" />
-      </div>
-      <div className='defence-card6'>
-        <img src="images/diamonds/jack.svg" alt="" />
-      </div>
-    </div>
-    </div>
     </>
-  )
-}
+  );
+};
 
-export default DefenseCards
+export default DefenseCards;
