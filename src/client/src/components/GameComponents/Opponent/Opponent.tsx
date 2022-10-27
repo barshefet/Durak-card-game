@@ -61,7 +61,7 @@ const Opponent = (props: any) => {
       {(props.players as Array<Player>).map((player: Player, index: number) => (
         <div className={`opponent${index + 1}`} key={`${player.playerName}1`}>
           <div className="player-name" key={`${player.playerName}2`}>
-            <h3 key={`${player.playerName}`}>{`${player.playerName}3`}</h3>
+            <h3 key={`${player.playerName}`}>{`${player.playerName}`}</h3>
           </div>
           <div className="pic" key={`${player.playerName}4`}>
             <img

@@ -98,6 +98,11 @@ export class MTF {
     this.attackCards.push(card[0]);
   }
 
+  defend(cardindex: number, playerIndex: number) {
+    let card: Card[] = this.players[playerIndex].cards.splice(cardindex, 1);
+    this.defenceCards.push(card[0]);
+  }
+
   startGame(deck: any) {
     this.players = deck.players;
     this.kozar = deck.kozar;

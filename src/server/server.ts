@@ -79,6 +79,11 @@ io.on("connection", (socket: any) => {
     ROOMS[roomMTF].nextPhase()
     io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
   })
+
+  socket.on('defend', (ID: string, cardIndex: number, playerIndex: number) => {
+    let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
+    
+  })
 });
 
 server.listen(PORT, () => {
