@@ -10,6 +10,7 @@ import { socket } from "../service/socket";
 import { MTF } from "../models/MTF.model";
 import { Player } from "../models/player.model";
 import { Card } from "../models/cards.model";
+import DefenseCards from "./GameComponents/DefenceCards/DefenseCards";
 
 function Game(props: any) {
   const [playerIndex, setPlayerIndex] = useState(0);
@@ -62,6 +63,7 @@ function Game(props: any) {
         roomID={props.roomID}
         players={Players}
         attackCards={attackCards}
+        tableSelectedCard={tableSelectedCard}
       />
       <TableDeck kozar={kozar} />
       <Opponent
@@ -73,6 +75,7 @@ function Game(props: any) {
         attackCards={attackCards}
         setSelectedCard={setTableSelectedCard}
       />
+      <DefenseCards />
       <GameInfo roomID={props.roomID} playerName={props.playerName} />
     </>
   ) : (

@@ -103,26 +103,26 @@
 
 .opponent4{
     @include opponent();
-    top:40%;
-    left: calc(74% - 117.5px)
+    top:32%;
+    left: calc(76% - 117.5px)
 }
 
 .opponent3{
     @include opponent();
-    top: 7%;
-    left: calc(69% - 117.5px);
+    top: 4%;
+    left: calc(67% - 117.5px);
 }
 
 .opponent2{
     @include opponent();
-    top: 7%;
-    left: calc(31% - 117.5px);
+    top: 4%;
+    left: calc(33% - 117.5px);
 }
 
 .opponent1{
     @include opponent();
-    top: 40%;
-    left: calc(26% - 117.5px);
+    top: 32%;
+    left: calc(24% - 117.5px);
 }
 
 

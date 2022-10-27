@@ -12,10 +12,8 @@ const PlayerHand = (props: any) => {
     let similarValueCardIndex = props.attackCards.findIndex((card: Card) => card.value === selectedCard.value) 
     if(props.attacker && props.phase === 1){
       socket.emit('attack', props.roomID, cardIndex, playerIndex)
-      console.log('first attack')
     }else if(!props.defender && props.phase === 2 && similarValueCardIndex !== -1){
       socket.emit('attack', props.roomID, cardIndex, playerIndex)
-      console.log('all-can-attack')
     }
   }
   return (

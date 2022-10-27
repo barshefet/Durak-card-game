@@ -1,7 +1,7 @@
 @mixin card {
     margin: 10px;
     img {
-        height: 140px;
+        width: 100px;
         -webkit-user-drag: none;
         box-shadow: black 2px 2px 8px;
 
@@ -30,7 +30,7 @@
 .attack-cards-container {
     position: absolute;
     top: 40%;
-    left: 33%;
+    left: 31.5%;
     .attack-cards {
         form{
         display: flex;

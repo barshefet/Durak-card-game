@@ -1,0 +1,60 @@
+@mixin defend-card {
+    img {
+        width: 100px;
+        margin: 10px;
+        -webkit-user-drag: none;
+        box-shadow: black 2px 2px 8px;
+    }
+}
+
+
+.defence-container {
+    position: fixed;
+    top: 35%;
+    left: 31.5%;
+    .defence-cards {
+        position: relative;
+        .defence-card1 {
+            position: absolute;
+            top: 0;
+            @include defend-card();
+
+        }
+
+        .defence-card2 {
+            position: absolute;
+            top: 0;
+            left: 117px;
+            @include defend-card();
+            
+        }
+        .defence-card3 {
+            position: absolute;
+            top: 0;
+            left: 235px;
+            @include defend-card();
+
+        }
+        .defence-card4 {
+            position: absolute;
+            top: 0;
+            left: 355px;
+            @include defend-card();
+
+        }
+        .defence-card5 {
+            position: absolute;
+            top: 0;
+            left: 472px;
+            @include defend-card();
+
+        }
+        .defence-card6 {
+            position: absolute;
+            top: 0;
+            left: 590px;
+            @include defend-card();
+
+        }
+    }
+}
