@@ -94,11 +94,22 @@ export class MTF {
   startGame(deck: any) {
     this.players = deck.players;
     this.kozar = deck.kozar;
-    this.deck = deck.deck;
+    this.deck = deck.deck.cards;
     this.phase = 1;
     this.roomReady = true;
     this.setAttacker(0);
     this.setDefender(1);
+  }
+
+  drawFromDeck(player: Player) {
+    let length = player.cards.length
+    if(length < 6 && this.deck.length !== 0){
+      let cardCount = 6 - length
+      for(let i = 0; i < cardCount; i++){
+        let drawnCard = this.deck.shift()
+        player.cards.push(drawnCard!)
+      } 
+    }
   }
 
   newRound() {
@@ -107,6 +118,9 @@ export class MTF {
     this.setCounter();
     this.setAttacker(this.turnCounter1);
     this.setDefender(this.turnCounter2);
+    this.players.forEach((player: Player) => {
+      this.drawFromDeck(player)
+    })
     this.phase = 1;
   }
 

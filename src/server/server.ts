@@ -101,7 +101,6 @@ io.on("connection", (socket: any) => {
   socket.on("give-up", (ID: string, index: number) => {
     let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
     ROOMS[roomMTF].giveUp(index);
-    console.log(ROOMS[roomMTF])
     io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
   });
 });
