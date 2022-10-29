@@ -6,7 +6,7 @@ import "./GiveUpButton.scss";
 const GiveUpButton = (props: any) => {
 
     const defenderGiveUp = () => {
-        socket.emit('give-up', props.roomID)
+        socket.emit('give-up', props.roomID, props.playerIndex)
     }
     
   return props.defender ? (

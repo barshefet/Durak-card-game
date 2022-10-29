@@ -7,7 +7,8 @@ const DefenceCard_1 = require("./DefenceCard");
 const Player_1 = require("./Player");
 class MTF {
     constructor(roomID, roomReady, players, playersReady, phase, kozar, deck, attackCards, defenceCards, attacker, defender) {
-        this.turnCounter = { counter1: 0, counter2: 1 };
+        this.turnCounter1 = 0;
+        this.turnCounter2 = 1;
         this.roomReady = roomReady;
         this.playersReady = playersReady;
         this.phase = phase;
@@ -29,36 +30,26 @@ class MTF {
         this.players[index].isReady = true;
         this.playersReady.push(name);
     }
-    setAttacker(name) {
-        if (this.attacker !== undefined) {
-            let index1 = this.players.findIndex((player) => player.playerName === this.attacker);
-            this.players[index1].isAttacker = false;
-        }
-        let index2 = this.players.findIndex((player) => player.playerName === name);
-        this.players[index2].isAttacker = true;
-        this.attacker = name;
+    setAttacker(index) {
+        this.players[index].isAttacker = true;
+        this.attacker = this.players[index].playerName;
     }
-    setDefender(name) {
-        if (this.defender !== undefined) {
-            let index1 = this.players.findIndex((player) => player.playerName === this.defender);
-            this.players[index1].isDefender = false;
-        }
-        let index = this.players.findIndex((player) => player.playerName === name);
+    setDefender(index) {
         this.players[index].isDefender = true;
-        this.defender = name;
+        this.defender = this.players[index].playerName;
     }
     setCounter() {
-        if (this.turnCounter.counter1 === this.players.length - 1) {
-            this.turnCounter.counter1 = 0;
+        if (this.turnCounter1 === (this.players.length - 1)) {
+            this.turnCounter1 = 0;
         }
         else {
-            this.turnCounter.counter1++;
+            this.turnCounter1++;
         }
-        if (this.turnCounter.counter2 === this.players.length - 1) {
-            this.turnCounter.counter2 = 0;
+        if (this.turnCounter2 === (this.players.length - 1)) {
+            this.turnCounter2 = 0;
         }
         else {
-            this.turnCounter.counter2++;
+            this.turnCounter2++;
         }
     }
     attack(cardindex, playerIndex) {
@@ -76,14 +67,16 @@ class MTF {
         this.deck = deck.deck;
         this.phase = 1;
         this.roomReady = true;
-        this.setAttacker(this.players[0].playerName);
-        this.setDefender(this.players[1].playerName);
+        this.setAttacker(0);
+        this.setDefender(1);
     }
     newRound() {
+        this.players[this.turnCounter1].isAttacker = false;
+        this.players[this.turnCounter2].isDefender = false;
+        this.setCounter();
+        this.setAttacker(this.turnCounter1);
+        this.setDefender(this.turnCounter2);
         this.phase = 1;
-        this.setCounter;
-        this.attacker = this.players[this.turnCounter.counter1].playerName;
-        this.defender = this.players[this.turnCounter.counter2].playerName;
     }
     nextPhase() {
         if (this.attackCards.length < 6) {
@@ -93,8 +86,7 @@ class MTF {
             this.phase = 3;
         }
     }
-    giveUp() {
-        let defenderIndex = this.players.findIndex((player) => player.playerName = this.defender);
+    giveUp(defenderIndex) {
         this.attackCards.forEach((card) => this.players[defenderIndex].cards.push(card));
         this.defenceCards.forEach((defenceCard) => this.players[defenderIndex].cards.push(defenceCard.card));
         this.attackCards.splice(0, this.attackCards.length);

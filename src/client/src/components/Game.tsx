@@ -76,7 +76,7 @@ function Game(props: any) {
         setSelectedCard={setTableSelectedCard}
       />
       <DefenseCards defenceCards={defenceCards} roomID={props.roomID} />
-      <GiveUpButton defender={defender} roomID={props.roomID} />
+      <GiveUpButton defender={defender} roomID={props.roomID} playerIndex={playerIndex}/>
       <GameInfo roomID={props.roomID} playerName={props.playerName} />
     </>
   ) : (
