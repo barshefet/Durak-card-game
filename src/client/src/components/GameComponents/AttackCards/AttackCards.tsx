@@ -25,6 +25,7 @@ const AttackCards = (props: any) => {
                     className="defender"
                     onClick={() =>
                       props.setSelectedCard({
+                        index: index,
                         suite: `${card.suite}`,
                         value: `${card.value}`,
                       })

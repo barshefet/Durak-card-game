@@ -85,9 +85,9 @@ export class MTF {
     this.attackCards.push(card[0]);
   }
 
-  defend(cardindex: number, playerIndex: number) {
+  defend(cardindex: number, playerIndex: number ,defenceIndex: number) {
     let card: Card[] = this.players[playerIndex].cards.splice(cardindex, 1);
-    let defenceCard = new DefenceCard(cardindex, card[0]);
+    let defenceCard = new DefenceCard(defenceIndex, card[0]);
     this.defenceCards.push(defenceCard);
   }
 

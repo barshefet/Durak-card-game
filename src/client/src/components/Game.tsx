@@ -24,6 +24,7 @@ function Game(props: any) {
   const [attackCards, setAttackCards] = useState([]);
   const [defenceCards, setDefenceCards] = useState<DefenceCard[]>([]);
   const [tableSelectedCard, setTableSelectedCard] = useState({
+    index: 0,
     suite: "",
     value: "",
   });

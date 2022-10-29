@@ -37,7 +37,7 @@ const PlayerHand = (props: any) => {
       selectedCard.suite === props.tableSelectedCard.suite &&
       selectedCardValue!.numValue >= tableSelectedCardValue!.numValue
     ) {
-      socket.emit("defend", props.roomID, cardIndex, playerIndex);
+      socket.emit("defend", props.roomID, cardIndex, playerIndex, props.tableSelectedCard.index);
       // or kozar to be added
     }
   };
