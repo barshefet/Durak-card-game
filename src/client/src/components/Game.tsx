@@ -12,6 +12,7 @@ import { Player } from "../models/player.model";
 import { Card } from "../models/cards.model";
 import DefenseCards from "./GameComponents/DefenceCards/DefenseCards";
 import { DefenceCard } from "../models/defenceCards.model";
+import GiveUpButton from "./GameComponents/giveUpButton/GiveUpButton";
 
 function Game(props: any) {
   const [playerIndex, setPlayerIndex] = useState(0);
@@ -21,36 +22,35 @@ function Game(props: any) {
   const [kozar, setkozar] = useState({ suite: "", value: "" });
   const [roomReady, setRoomReady] = useState(false);
   const [attackCards, setAttackCards] = useState([]);
-  const [defenceCards, setDefenceCards] = useState<DefenceCard[]>([])
+  const [defenceCards, setDefenceCards] = useState<DefenceCard[]>([]);
   const [tableSelectedCard, setTableSelectedCard] = useState({
     suite: "",
     value: "",
   });
-  const [phase, setPhase] = useState(0)
+  const [phase, setPhase] = useState(0);
   const [Players, setPlayers] = useState<Player[]>([]);
 
   const reSend = () => {
     socket.emit("re-send", props.roomID);
   };
 
-
   socket.on("receive-mtf", (mtf: MTF) => {
     let index = mtf.players.findIndex(
       (element: any) => element.playerName === props.playerName
     );
     setPlayerIndex(index);
+   console.log(mtf)
 
     if (index !== -1) {
       setRoomReady(mtf.roomReady);
-      setPlayers(mtf.players)     
+      setPlayers(mtf.players);
       setPlayerCards(mtf.players[index].cards);
       setkozar(mtf.kozar);
       setAttackCards(mtf.attackCards);
-      setAttacker(mtf.players[index].isAttacker)
-      setDefender(mtf.players[index].isDefender)
-      setPhase(mtf.phase)
-      setDefenceCards(mtf.defenceCards)
-      
+      setAttacker(mtf.players[index].isAttacker);
+      setDefender(mtf.players[index].isDefender);
+      setPhase(mtf.phase);
+      setDefenceCards(mtf.defenceCards);
     }
   });
 
@@ -69,25 +69,20 @@ function Game(props: any) {
         tableSelectedCard={tableSelectedCard}
       />
       <TableDeck kozar={kozar} />
-      <Opponent
-        gameReady={roomReady}
-        players={Players}
-      />
+      <Opponent gameReady={roomReady} players={Players} />
       <AttackCards
         defender={defender}
         attackCards={attackCards}
         setSelectedCard={setTableSelectedCard}
       />
-      <DefenseCards defenceCards={defenceCards} />
+      <DefenseCards defenceCards={defenceCards} roomID={props.roomID} />
+      <GiveUpButton defender={defender} roomID={props.roomID} />
       <GameInfo roomID={props.roomID} playerName={props.playerName} />
     </>
   ) : (
     <>
       <Background />
-      <Opponent
-        gameReady={roomReady}
-        players={Players}
-      />
+      <Opponent gameReady={roomReady} players={Players} />
       <GameNotReady roomID={props.roomID} playerName={props.playerName} />
       <GameInfo roomID={props.roomID} playerName={props.playerName} />
     </>

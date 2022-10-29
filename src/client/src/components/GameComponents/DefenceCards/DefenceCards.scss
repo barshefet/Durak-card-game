@@ -11,45 +11,45 @@
 .defence-container {
     position: fixed;
     top: 35%;
-    left: 19%;
+    left: 31.5%;
     .defence-cards {
         position: relative;
-        .defence-card1 {
+        .defence-card0 {
             position: absolute;
             top: 0;
             @include defend-card();
 
         }
 
-        .defence-card2 {
+        .defence-card1 {
             position: absolute;
             top: 0;
             left: 117px;
             @include defend-card();
             
         }
-        .defence-card3 {
+        .defence-card2 {
             position: absolute;
             top: 0;
             left: 235px;
             @include defend-card();
 
         }
-        .defence-card4 {
+        .defence-card3 {
             position: absolute;
             top: 0;
             left: 355px;
             @include defend-card();
 
         }
-        .defence-card5 {
+        .defence-card4 {
             position: absolute;
             top: 0;
             left: 472px;
             @include defend-card();
 
         }
-        .defence-card6 {
+        .defence-card5 {
             position: absolute;
             top: 0;
             left: 590px;

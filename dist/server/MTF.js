@@ -6,7 +6,8 @@ exports.MTF = void 0;
 const DefenceCard_1 = require("./DefenceCard");
 const Player_1 = require("./Player");
 class MTF {
-    constructor(roomID, roomReady, players, playersReady, phase, kozar, deck, attackCards, defenceCards, attacker, defender, turnCounter) {
+    constructor(roomID, roomReady, players, playersReady, phase, kozar, deck, attackCards, defenceCards, attacker, defender) {
+        this.turnCounter = { counter1: 0, counter2: 1 };
         this.roomReady = roomReady;
         this.playersReady = playersReady;
         this.phase = phase;
@@ -18,7 +19,6 @@ class MTF {
         this.defenceCards = defenceCards;
         this.attacker = attacker;
         this.defender = defender;
-        this.turnCounter = turnCounter;
     }
     joinGame(playerName) {
         let player = new Player_1.Player(playerName, []);
@@ -48,11 +48,17 @@ class MTF {
         this.defender = name;
     }
     setCounter() {
-        if (this.turnCounter === this.players.length - 1) {
-            this.turnCounter = 0;
+        if (this.turnCounter.counter1 === this.players.length - 1) {
+            this.turnCounter.counter1 = 0;
         }
         else {
-            this.turnCounter++;
+            this.turnCounter.counter1++;
+        }
+        if (this.turnCounter.counter2 === this.players.length - 1) {
+            this.turnCounter.counter2 = 0;
+        }
+        else {
+            this.turnCounter.counter2++;
         }
     }
     attack(cardindex, playerIndex) {
@@ -72,13 +78,12 @@ class MTF {
         this.roomReady = true;
         this.setAttacker(this.players[0].playerName);
         this.setDefender(this.players[1].playerName);
-        this.turnCounter = 1;
     }
     newRound() {
         this.phase = 1;
-        this.attacker = this.players[this.turnCounter].playerName;
-        this.defender = this.players[this.turnCounter + 1].playerName;
         this.setCounter;
+        this.attacker = this.players[this.turnCounter.counter1].playerName;
+        this.defender = this.players[this.turnCounter.counter2].playerName;
     }
     nextPhase() {
         if (this.attackCards.length < 6) {

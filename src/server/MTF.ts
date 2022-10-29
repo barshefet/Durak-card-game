@@ -15,9 +15,9 @@ export class MTF {
   deck: Card[];
   attackCards: Card[];
   defenceCards: DefenceCard[];
-  attacker;
-  defender;
-  turnCounter: number;
+  attacker: string;
+  defender: string ;
+  turnCounter = {counter1: 0, counter2: 1};
 
   constructor(
     roomID: string,
@@ -31,7 +31,7 @@ export class MTF {
     defenceCards: any,
     attacker: any,
     defender: any,
-    turnCounter: any
+    
   ) {
     this.roomReady = roomReady;
     this.playersReady = playersReady;
@@ -44,7 +44,7 @@ export class MTF {
     this.defenceCards = defenceCards;
     this.attacker = attacker;
     this.defender = defender;
-    this.turnCounter = turnCounter;
+   
   }
 
   joinGame(playerName: string) {
@@ -83,10 +83,15 @@ export class MTF {
   }
 
   setCounter() {
-    if (this.turnCounter === this.players.length - 1) {
-      this.turnCounter = 0;
+    if (this.turnCounter.counter1 === this.players.length - 1) {
+      this.turnCounter.counter1 = 0;
     } else {
-      this.turnCounter++;
+      this.turnCounter.counter1++;
+    }
+    if (this.turnCounter.counter2 === this.players.length - 1) {
+      this.turnCounter.counter2 = 0;
+    } else {
+      this.turnCounter.counter2++;
     }
   }
 
@@ -109,14 +114,15 @@ export class MTF {
     this.roomReady = true;
     this.setAttacker(this.players[0].playerName);
     this.setDefender(this.players[1].playerName);
-    this.turnCounter = 1;
+    
   }
 
   newRound() {
     this.phase = 1;
-    this.attacker = this.players[this.turnCounter].playerName;
-    this.defender = this.players[this.turnCounter + 1].playerName;
     this.setCounter;
+    this.attacker = this.players[this.turnCounter.counter1].playerName;
+    this.defender = this.players[this.turnCounter.counter2].playerName;
+    
   }
 
   nextPhase() {
@@ -134,6 +140,5 @@ export class MTF {
     this.attackCards.splice(0,this.attackCards.length)
     this.defenceCards.splice(0, this.defenceCards.length)
     this.newRound()
-
   }
 }

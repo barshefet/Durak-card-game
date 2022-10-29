@@ -22,7 +22,7 @@ io.on("connection", (socket) => {
     console.log(`client connected`);
     socket.on("create-room", (roomID, playerName) => {
         socket.join(roomID);
-        let mtf = new MTF_1.MTF(roomID, false, [], [], 0, undefined, undefined, [], [], undefined, undefined, undefined);
+        let mtf = new MTF_1.MTF(roomID, false, [], [], 0, undefined, undefined, [], [], undefined, undefined);
         mtf.joinGame(playerName);
         ROOMS.push(mtf);
         io.to(roomID).emit("receive-mtf", mtf);
@@ -60,20 +60,25 @@ io.on("connection", (socket) => {
             io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
         }
     });
-    socket.on('re-send', (ID) => {
+    socket.on("re-send", (ID) => {
         let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
         io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
     });
-    socket.on('attack', (ID, cardIndex, playerIndex) => {
+    socket.on("attack", (ID, cardIndex, playerIndex) => {
         let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
         ROOMS[roomMTF].attack(cardIndex, playerIndex);
         ROOMS[roomMTF].nextPhase();
         io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
     });
-    socket.on('defend', (ID, cardIndex, playerIndex) => {
+    socket.on("defend", (ID, cardIndex, playerIndex) => {
         let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
         ROOMS[roomMTF].defend(cardIndex, playerIndex);
         ROOMS[roomMTF].nextPhase();
+        io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
+    });
+    socket.on("give-up", (ID) => {
+        let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
+        ROOMS[roomMTF].giveUp();
         io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
     });
 });
