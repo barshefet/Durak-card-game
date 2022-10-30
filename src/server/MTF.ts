@@ -19,6 +19,7 @@ export class MTF {
   defender: string;
   turnCounter1: number = 0;
   turnCounter2: number = 1;
+  playersDone: string[] = [];
 
   constructor(
     roomID: string,
@@ -68,15 +69,15 @@ export class MTF {
   }
 
   setCounter() {
-    if (this.turnCounter1 === (this.players.length - 1)) {
+    if (this.turnCounter1 === this.players.length - 1) {
       this.turnCounter1 = 0;
     } else {
-      this.turnCounter1++
+      this.turnCounter1++;
     }
-    if (this.turnCounter2 === (this.players.length - 1)) {
-      this.turnCounter2 = 0
+    if (this.turnCounter2 === this.players.length - 1) {
+      this.turnCounter2 = 0;
     } else {
-      this.turnCounter2++
+      this.turnCounter2++;
     }
   }
 
@@ -85,7 +86,7 @@ export class MTF {
     this.attackCards.push(card[0]);
   }
 
-  defend(cardindex: number, playerIndex: number ,defenceIndex: number) {
+  defend(cardindex: number, playerIndex: number, defenceIndex: number) {
     let card: Card[] = this.players[playerIndex].cards.splice(cardindex, 1);
     let defenceCard = new DefenceCard(defenceIndex, card[0]);
     this.defenceCards.push(defenceCard);
@@ -102,26 +103,30 @@ export class MTF {
   }
 
   drawFromDeck(player: Player) {
-    let length = player.cards.length
-    if(length < 6 && this.deck.length !== 0){
-      let cardCount = 6 - length
-      for(let i = 0; i < cardCount; i++){
-        let drawnCard = this.deck.shift()
-        player.cards.push(drawnCard!)
-      } 
+    let length = player.cards.length;
+    if (length < 6 && this.deck.length !== 0) {
+      let cardCount = 6 - length;
+      for (let i = 0; i < cardCount; i++) {
+        let drawnCard = this.deck.shift();
+        player.cards.push(drawnCard!);
+      }
     }
   }
 
-  newRound() {
+  newRound(defenderSucceeded: boolean) {
     this.players[this.turnCounter1].isAttacker = false;
     this.players[this.turnCounter2].isDefender = false;
+    if (!defenderSucceeded) {
+      this.setCounter();
+    }
     this.setCounter();
     this.setAttacker(this.turnCounter1);
     this.setDefender(this.turnCounter2);
     this.players.forEach((player: Player) => {
-      this.drawFromDeck(player)
-    })
+      this.drawFromDeck(player);
+    });
     this.phase = 1;
+    this.playersDone.splice(0, this.playersDone.length)
   }
 
   nextPhase() {
@@ -133,7 +138,6 @@ export class MTF {
   }
 
   giveUp(defenderIndex: number) {
-    
     this.attackCards.forEach((card: Card) =>
       this.players[defenderIndex].cards.push(card)
     );
@@ -142,6 +146,24 @@ export class MTF {
     );
     this.attackCards.splice(0, this.attackCards.length);
     this.defenceCards.splice(0, this.defenceCards.length);
-    this.newRound();
+    this.newRound(false);
+  }
+
+  playersOut(playerIndex: number) {
+    if(this.playersDone.length < this.players.length - 1){
+    this.playersDone.push(this.players[playerIndex].playerName);
+    }
+  }
+
+  didDefenderSucceed() {
+    if (
+      this.players.length - 1 === this.playersDone.length &&
+      this.defenceCards.length === this.attackCards.length
+    ) {
+      this.attackCards.splice(0, this.attackCards.length);
+      this.defenceCards.splice(0, this.defenceCards.length);
+      this.newRound(true);
+    }
+    
   }
 }

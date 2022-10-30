@@ -20,7 +20,7 @@ function Game(props: any) {
   const [attacker, setAttacker] = useState(false);
   const [playerCards, setPlayerCards] = useState<Card[]>([]);
   const [kozar, setkozar] = useState({ suite: "", value: "" });
-  const [roomReady, setRoomReady] = useState(false);
+  const [roomReady, setRoomReady] = useState(true);
   const [attackCards, setAttackCards] = useState([]);
   const [defenceCards, setDefenceCards] = useState<DefenceCard[]>([]);
   const [tableSelectedCard, setTableSelectedCard] = useState({

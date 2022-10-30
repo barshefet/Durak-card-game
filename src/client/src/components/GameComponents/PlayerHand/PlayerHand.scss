@@ -1,31 +1,29 @@
-
 @mixin center {
-    
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-
-.player-hand-container{
+.player-hand-container {
     position: absolute;
     width: 100vmax;
     top: 76%;
     left: 0;
-.player-hand{
-@include center();
-z-index: 2134;
-margin-bottom: 10px;
+    .player-hand {
+        overflow: x;
+        white-space: nowrap;
+        @include center();
+        z-index: 2134;
+        margin-bottom: 10px;
 
-    .player-card{
-        height: 220px;
-        margin-left: 5px;
-        -webkit-user-drag: none;
-        &:hover{
-            cursor: pointer;
-            transform: translateY(-35px);
+        .player-card {
+            height: 220px;
+            margin-left: 5px;
+            -webkit-user-drag: none;
+            &:hover {
+                cursor: pointer;
+                transform: translateY(-35px);
+            }
         }
-        
     }
-}
 }

@@ -91,16 +91,34 @@ io.on("connection", (socket: any) => {
     io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
   });
 
-  socket.on("defend", (ID: string, cardIndex: number, playerIndex: number, defenceIndex: number) => {
-    let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
-    ROOMS[roomMTF].defend(cardIndex, playerIndex, defenceIndex);
-    ROOMS[roomMTF].nextPhase();
-    io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
-  });
+  socket.on(
+    "defend",
+    (
+      ID: string,
+      cardIndex: number,
+      playerIndex: number,
+      defenceIndex: number
+    ) => {
+      let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
+      ROOMS[roomMTF].defend(cardIndex, playerIndex, defenceIndex);
+      ROOMS[roomMTF].nextPhase();
+      io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
+      ROOMS[roomMTF].didDefenderSucceed();
+      io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
+    }
+  );
 
   socket.on("give-up", (ID: string, index: number) => {
     let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
     ROOMS[roomMTF].giveUp(index);
+    io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
+  });
+
+  socket.on("im-out", (ID: string, playerIndex: number) => {
+    let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
+    ROOMS[roomMTF].playersOut(playerIndex);
+    //maybe add a restriction later
+    ROOMS[roomMTF].didDefenderSucceed()
     io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
   });
 });

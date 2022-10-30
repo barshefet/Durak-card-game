@@ -8,6 +8,10 @@ const GiveUpButton = (props: any) => {
     const defenderGiveUp = () => {
         socket.emit('give-up', props.roomID, props.playerIndex)
     }
+
+    const imOut = () => {
+        socket.emit('im-out', props.roomID, props.playerIndex)
+    }
     
   return props.defender ? (
     <>
@@ -18,7 +22,7 @@ const GiveUpButton = (props: any) => {
   ) : (
     <>
       <div className="give-up-button-container">
-        <button className="give-up-button">I`m Done</button>
+        <button className="give-up-button" onClick={() => imOut()}>I`m Done</button>
       </div>
     </>
   );
