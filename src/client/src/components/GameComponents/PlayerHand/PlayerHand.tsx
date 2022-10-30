@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Card } from "../../../models/cards.model";
-import { MTF } from "../../../models/MTF.model";
 import { socket } from "../../../service/socket";
 import "./PlayerHand.scss";
 
@@ -18,12 +17,23 @@ const PlayerHand = (props: any) => {
   ];
   const tryAttack = (cardIndex: number, playerIndex: number) => {
     let selectedCard = props.players[playerIndex].cards[cardIndex];
-    let selectedCardValue = VALUES.find((element) => element.strValue === selectedCard.value)
-    let tableSelectedCardValue = VALUES.find((element) => element.strValue === props.tableSelectedCard.value)
+
+    let selectedCardValue = VALUES.find(
+      (element) => element.strValue === selectedCard.value
+    );
+
+    let tableSelectedCardValue = VALUES.find(
+      (element) => element.strValue === props.tableSelectedCard.value
+    );
+
     let similarValueAttackCardIndex = props.attackCards.findIndex(
       (card: Card) => card.value === selectedCard.value
     );
-    let similarValueDefenceCardIndex = props.defenceCards.find((card: Card) => card.value === selectedCard.value)
+
+    let similarValueDefenceCardIndex = props.defenceCards.find(
+      (card: Card) => card.value === selectedCard.value
+    );
+
     if (props.attacker && props.phase === 1) {
       socket.emit("attack", props.roomID, cardIndex, playerIndex);
     } else if (
@@ -32,16 +42,41 @@ const PlayerHand = (props: any) => {
       similarValueAttackCardIndex !== -1
     ) {
       socket.emit("attack", props.roomID, cardIndex, playerIndex);
+    } else if (props.defender && props.forward) {
+      socket.emit("try-forward", props.roomID, cardIndex, playerIndex);
+      props.setForward(false);
     } else if (
       props.defender &&
       props.phase > 1 &&
       selectedCard.suite === props.tableSelectedCard.suite &&
       selectedCardValue!.numValue >= tableSelectedCardValue!.numValue
     ) {
-      socket.emit("defend", props.roomID, cardIndex, playerIndex, props.tableSelectedCard.index);
-      // or kozar to be added
-    }else if(!props.defender && props.phase === 2 && similarValueDefenceCardIndex !== -1){
+      socket.emit(
+        "defend",
+        props.roomID,
+        cardIndex,
+        playerIndex,
+        props.tableSelectedCard.index
+      );
+    } else if (
+      !props.defender &&
+      props.phase === 2 &&
+      similarValueDefenceCardIndex !== -1
+    ) {
       socket.emit("attack", props.roomID, cardIndex, playerIndex);
+    } else if (
+      props.defender &&
+      props.phase > 1 &&
+      selectedCard.suite === props.kozar.suite &&
+      props.tableSelectedCard.suite !== props.kozar.suite
+    ) {
+      socket.emit(
+        "defend",
+        props.roomID,
+        cardIndex,
+        playerIndex,
+        props.tableSelectedCard.index
+      );
     }
   };
   return (

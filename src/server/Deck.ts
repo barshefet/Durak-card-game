@@ -2,8 +2,8 @@ const SUITE = ["clubs", "hearts", "diamonds", "spades"];
 const VALUES = ["6", "7", "8", "9", "10", "jack", "queen", "king", "ace"];
 
 export class Deck {
-  cards;
-  constructor(c: any) {
+  cards: Card[];
+  constructor(c: Card[]) {
     this.cards = c;
   }
 
@@ -18,6 +18,7 @@ export class Deck {
   //the "top card" on the deck is pulled and defined as the Kozar
   kozar() {
     let Kozar = this.cards.shift();
+    this.cards.push(Kozar!);
     return Kozar;
   }
 

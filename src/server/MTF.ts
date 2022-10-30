@@ -126,7 +126,7 @@ export class MTF {
       this.drawFromDeck(player);
     });
     this.phase = 1;
-    this.playersDone.splice(0, this.playersDone.length)
+    this.playersDone.splice(0, this.playersDone.length);
   }
 
   nextPhase() {
@@ -150,8 +150,8 @@ export class MTF {
   }
 
   playersOut(playerIndex: number) {
-    if(this.playersDone.length < this.players.length - 1){
-    this.playersDone.push(this.players[playerIndex].playerName);
+    if (this.playersDone.length < this.players.length - 1) {
+      this.playersDone.push(this.players[playerIndex].playerName);
     }
   }
 
@@ -164,6 +164,20 @@ export class MTF {
       this.defenceCards.splice(0, this.defenceCards.length);
       this.newRound(true);
     }
-    
+  }
+
+  tryForward(cardIndex: number, playerIndex: number) {
+    let allValuesEqual = this.attackCards.every(
+      (card: Card) =>
+        card.value === this.players[playerIndex].cards[cardIndex].value
+    );
+    if (this.defenceCards.length === 0 && allValuesEqual) {
+      this.attack(cardIndex, playerIndex);
+      this.players[this.turnCounter1].isAttacker = false;
+      this.players[this.turnCounter2].isDefender = false;
+      this.setCounter();
+      this.setAttacker(this.turnCounter1);
+      this.setDefender(this.turnCounter2);
+    }
   }
 }

@@ -16,11 +16,11 @@ import GiveUpButton from "./GameComponents/giveUpButton/GiveUpButton";
 
 function Game(props: any) {
   const [playerIndex, setPlayerIndex] = useState(0);
-  const [defender, setDefender] = useState(false);
+  const [defender, setDefender] = useState(true);
   const [attacker, setAttacker] = useState(false);
   const [playerCards, setPlayerCards] = useState<Card[]>([]);
   const [kozar, setkozar] = useState({ suite: "", value: "" });
-  const [roomReady, setRoomReady] = useState(false);
+  const [roomReady, setRoomReady] = useState(true);
   const [attackCards, setAttackCards] = useState([]);
   const [defenceCards, setDefenceCards] = useState<DefenceCard[]>([]);
   const [tableSelectedCard, setTableSelectedCard] = useState({
@@ -28,19 +28,16 @@ function Game(props: any) {
     suite: "",
     value: "",
   });
+  const [forward, setForward] = useState(false);
   const [phase, setPhase] = useState(0);
   const [Players, setPlayers] = useState<Player[]>([]);
-
-  const reSend = () => {
-    socket.emit("re-send", props.roomID);
-  };
 
   socket.on("receive-mtf", (mtf: MTF) => {
     let index = mtf.players.findIndex(
       (element: any) => element.playerName === props.playerName
     );
     setPlayerIndex(index);
-   console.log(mtf)
+    console.log(mtf);
 
     if (index !== -1) {
       setRoomReady(mtf.roomReady);
@@ -68,7 +65,11 @@ function Game(props: any) {
         players={Players}
         attackCards={attackCards}
         tableSelectedCard={tableSelectedCard}
+        setTableSelected={setTableSelectedCard}
         defenceCards={defenceCards}
+        kozar={kozar}
+        forward={forward}
+        setForward={setForward}
       />
       <TableDeck kozar={kozar} />
       <Opponent gameReady={roomReady} players={Players} />
@@ -78,7 +79,12 @@ function Game(props: any) {
         setSelectedCard={setTableSelectedCard}
       />
       <DefenseCards defenceCards={defenceCards} roomID={props.roomID} />
-      <GiveUpButton defender={defender} roomID={props.roomID} playerIndex={playerIndex}/>
+      <GiveUpButton
+        defender={defender}
+        roomID={props.roomID}
+        playerIndex={playerIndex}
+        setForward={setForward}
+      />
       <GameInfo roomID={props.roomID} playerName={props.playerName} />
     </>
   ) : (

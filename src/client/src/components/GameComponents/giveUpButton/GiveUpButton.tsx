@@ -1,5 +1,4 @@
 import React from "react";
-import { Player } from "../../../models/player.model";
 import { socket } from "../../../service/socket";
 import "./GiveUpButton.scss";
 
@@ -17,6 +16,9 @@ const GiveUpButton = (props: any) => {
     <>
       <div className="give-up-button-container">
         <button className="give-up-button" onClick={()=>defenderGiveUp()}>Give Up</button>
+      </div>
+      <div className="forward-container">
+        <button className="forward-button" onClick={()=> props.setForward(true)}>Forward</button>
       </div>
     </>
   ) : (

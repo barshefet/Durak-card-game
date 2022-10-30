@@ -118,9 +118,18 @@ io.on("connection", (socket: any) => {
     let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
     ROOMS[roomMTF].playersOut(playerIndex);
     //maybe add a restriction later
-    ROOMS[roomMTF].didDefenderSucceed()
+    ROOMS[roomMTF].didDefenderSucceed();
     io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
   });
+
+  socket.on(
+    "try-forward",
+    (ID: string, cardIndex: number, playerIndex: number) => {
+      let roomMTF = ROOMS.findIndex((room) => room.roomID === ID);
+      ROOMS[roomMTF].tryForward(cardIndex, playerIndex);
+      io.to(ID).emit("receive-mtf", ROOMS[roomMTF]);
+    }
+  );
 });
 
 server.listen(PORT, () => {

@@ -1,13 +1,13 @@
 .give-up-button-container {
     position: fixed;
-    top: 83%;
-    left: 17%;
+    top: 64%;
+    left: 43%;
     
     .give-up-button {
         background: #ff4742;
         border: 1px solid #ff4742;
         border-radius: 6px;
-        box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+        box-shadow: rgb(0, 0, 0) 1px 2px 4px;
         box-sizing: border-box;
         color: #ffffff;
         cursor: pointer;
@@ -15,7 +15,7 @@
         font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
         font-size: 20px;
         font-weight: 800;
-        line-height: 56px;
+        line-height: 52px;
         min-height: 40px;
         width: 120px;
         outline: 0;
@@ -37,6 +37,49 @@
     }
 
     .give-up-button:active {
+        opacity: 0.5;
+    }
+}
+
+.forward-container{
+    position: fixed;
+    top: 64%;
+    left: 51%;
+    
+    .forward-button {
+        background: rgb(82, 82, 245);
+        border: 1px solid rgb(82, 82, 245);
+        border-radius: 6px;
+        box-shadow: rgb(0, 0, 0) 1px 2px 4px;
+        box-sizing: border-box;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        line-height: 52px;
+        min-height: 40px;
+        width: 120px;
+        outline: 0;
+        padding: 12px 14px;
+        text-align: center;
+        text-rendering: geometricprecision;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+    }
+
+    .forward-button:hover,
+    .forward-button:active {
+        background-color: white;
+        background-position: 0 0;
+        color: rgb(82, 82, 245);
+    }
+
+    .forward-button:active {
         opacity: 0.5;
     }
 }

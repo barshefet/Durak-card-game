@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './GameInfo.scss'
 
 const GameInfo = (props: any) => {
