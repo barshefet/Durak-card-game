@@ -6,7 +6,7 @@ const GameInfo = (props: any) => {
         <>
         <div className='gameinfo'>
             <h2>Room ID : {props.roomID}</h2>
-            <h2>Player Name: {props.playerName}</h2>
+            <h2>Player Name : {props.playerName}</h2>
         </div>
         </>
     )

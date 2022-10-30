@@ -20,15 +20,16 @@ const PlayerHand = (props: any) => {
     let selectedCard = props.players[playerIndex].cards[cardIndex];
     let selectedCardValue = VALUES.find((element) => element.strValue === selectedCard.value)
     let tableSelectedCardValue = VALUES.find((element) => element.strValue === props.tableSelectedCard.value)
-    let similarValueCardIndex = props.attackCards.findIndex(
+    let similarValueAttackCardIndex = props.attackCards.findIndex(
       (card: Card) => card.value === selectedCard.value
     );
+    let similarValueDefenceCardIndex = props.defenceCards.find((card: Card) => card.value === selectedCard.value)
     if (props.attacker && props.phase === 1) {
       socket.emit("attack", props.roomID, cardIndex, playerIndex);
     } else if (
       !props.defender &&
       props.phase === 2 &&
-      similarValueCardIndex !== -1
+      similarValueAttackCardIndex !== -1
     ) {
       socket.emit("attack", props.roomID, cardIndex, playerIndex);
     } else if (
@@ -39,6 +40,8 @@ const PlayerHand = (props: any) => {
     ) {
       socket.emit("defend", props.roomID, cardIndex, playerIndex, props.tableSelectedCard.index);
       // or kozar to be added
+    }else if(!props.defender && props.phase === 2 && similarValueDefenceCardIndex !== -1){
+      socket.emit("attack", props.roomID, cardIndex, playerIndex);
     }
   };
   return (

@@ -5,12 +5,17 @@
     z-index: 1;
     border-radius: 5px;
     width: 50px;
-
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
     img {
+        position: relative;
         height: 40px;
         width: 40px;
         -webkit-user-drag: none;
     }
+}
 }
 
 @mixin opponent-ready {
