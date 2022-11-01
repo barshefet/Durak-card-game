@@ -4,6 +4,8 @@ import { socket } from "../../../service/socket";
 import "./PlayerHand.scss";
 
 const PlayerHand = (props: any) => {
+
+  //value map for numeral value comparison
   const VALUES = [
     { strValue: "6", numValue: 6 },
     { strValue: "7", numValue: 7 },
@@ -15,26 +17,33 @@ const PlayerHand = (props: any) => {
     { strValue: "king", numValue: 13 },
     { strValue: "ace", numValue: 14 },
   ];
-  const tryAttack = (cardIndex: number, playerIndex: number) => {
-    let selectedCard = props.players[playerIndex].cards[cardIndex];
 
+  //the function is being called with every click on the rendered playerHand cards
+  // checks if any case in which a player can interact with the game
+  // either by attacking or defending, or even as skipping a turn by forwarding the attack cards
+
+  const tryAttack = (cardIndex: number, playerIndex: number) => {
+    // gets the card that was clicked on as a object 
+    let selectedCard = props.players[playerIndex].cards[cardIndex];
+    // gets the numeral value of the player`s clicked card 
     let selectedCardValue = VALUES.find(
       (element) => element.strValue === selectedCard.value
     );
-
+    //gets the numeral value of the attack card selected by the defender
     let tableSelectedCardValue = VALUES.find(
       (element) => element.strValue === props.tableSelectedCard.value
     );
-
+      //check if their is a similar value card on the attack card array
     let similarValueAttackCardIndex = props.attackCards.findIndex(
       (card: Card) => card.value === selectedCard.value
     );
-
+      //same, just on the defence cards array
     let similarValueDefenceCardIndex = props.defenceCards.find(
       (card: Card) => card.value === selectedCard.value
     );
 
     if (props.attacker && props.phase === 1) {
+      //first attack that only the attacker can do at the satrt of the round (phase 1)
       socket.emit("attack", props.roomID, cardIndex, playerIndex);
     } else if (
       !props.defender &&

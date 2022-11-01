@@ -13,6 +13,8 @@ import { Card } from "../models/cards.model";
 import DefenseCards from "./GameComponents/DefenceCards/DefenseCards";
 import { DefenceCard } from "../models/defenceCards.model";
 import GiveUpButton from "./GameComponents/giveUpButton/GiveUpButton";
+import RoleStatusAttacker from "./GameComponents/RoleStatus/RoleStatusAttacker";
+import RoleStatusDefender from "./GameComponents/RoleStatus/RoleStatusDefender";
 
 function Game(props: any) {
   const [playerIndex, setPlayerIndex] = useState(0);
@@ -86,6 +88,8 @@ function Game(props: any) {
         setForward={setForward}
       />
       <GameInfo roomID={props.roomID} playerName={props.playerName} />
+      <RoleStatusAttacker attacker={attacker} />
+      <RoleStatusDefender defender={defender} />
     </>
   ) : (
     <>

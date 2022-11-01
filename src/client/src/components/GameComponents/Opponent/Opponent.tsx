@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { MTF } from "../../../models/MTF.model";
+import React from "react";
 import { Player } from "../../../models/player.model";
 import IsAttacker from "./IsAttacker";
 import OpponentReadyStatus from "./OpponentReadyStatus";
@@ -7,27 +6,6 @@ import "./Opponent.scss";
 import IsDefender from "./IsDefender";
 
 const Opponent = (props: any) => {
-
-  const [rePlayers, setRePlayers] = useState<Player[]>([])
-  
-  const organizePlayers = (players: Player[], index: number) => {
-    if (players) {
-      let results: Player[] = players;
-      for (let i = 0; i < index; i++) {
-        let shiftedPlayer = results.shift();
-        results.push(shiftedPlayer!);
-      }
-      results.shift();
-      setRePlayers(results)
-    } else {
-      return;
-    }
-  };
-
-  // useEffect(() => {
-  //   console.log('players have changed')
-  // }, [props.player]);
-
   return props.gameReady ? (
     <>
       {(props.players as Array<Player>).map((player, index) => (
@@ -36,15 +14,21 @@ const Opponent = (props: any) => {
             <h3 key={`${player.playerName}113`}>{`${player.playerName}`}</h3>
           </div>
           <div className="pic" key={`${player.playerName}221`}>
-            <img src="images/opponent/pic.svg" alt="" key={`${player.playerName}222`}/>
+            <img
+              src="images/opponent/pic.svg"
+              alt=""
+              key={`${player.playerName}222`}
+            />
 
             <IsAttacker isAttacker={player.isAttacker} />
             <IsDefender isDefender={player.isDefender} />
-
           </div>
           <div className="opponent-cards" key={`${player.playerName}331`}>
             {(player.cards as any).map((card: any, index: number) => (
-              <div className="opponent-card" key={`${player.playerName}332${index}`}>
+              <div
+                className="opponent-card"
+                key={`${player.playerName}332${index}`}
+              >
                 <img
                   src="images/red2.svg"
                   alt=""

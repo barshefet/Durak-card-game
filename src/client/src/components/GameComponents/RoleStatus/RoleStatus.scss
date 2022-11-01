@@ -1,0 +1,27 @@
+.role-status-container {
+    position: fixed;
+    top: 25%;
+    width: 500px;
+    left: calc(50% - 250px);
+    .role-status {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .role-announce {
+            color: white;
+        }
+        .attacker-role {
+            color: red;
+            font-size: 25px;
+            margin-left: 10px;
+            text-shadow: white 0px 0px 3px;
+        }
+        .defender-role {
+            font-size: 25px;
+            color: rgb(63, 129, 63);
+            margin-left: 10px;
+            text-shadow: white 0px 0px 3px;
+        }
+    }
+}
