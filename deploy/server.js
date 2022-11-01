@@ -14,8 +14,7 @@ const PORT = process.env.PORT || 4000;
 const root = path_1.default.join(process.cwd(), "client");
 const server = http_1.default.createServer(app);
 const ROOMS = [];
-app.use(express_1.default.static(root));
-app.get("*", (_req, res) => {
+app.get("/", (_req, res) => {
     res.sendFile(path_1.default.join(root, "index.html"));
 });
 const io = new socket_io_1.Server(server, { cors: { origin: "http://localhost:3000" } });
