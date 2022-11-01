@@ -13,6 +13,7 @@ const server = http.createServer(app);
 
 const ROOMS: MTF[] = [];
 
+app.use(express.static(root));
 
 app.get("/", (_req, res) => {
   res.sendFile(path.join(root, "index.html"));
