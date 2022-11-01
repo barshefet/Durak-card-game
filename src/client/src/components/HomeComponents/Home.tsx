@@ -3,9 +3,14 @@
 import React, { useState } from "react";
 import "./Home.scss";
 import Popup from "./Popup";
+import { useNavigate } from "react-router-dom";
+
 
 const Home = (props: any) => {
   const [popup, setPopup] = useState(false);
+
+  const navigate = useNavigate()
+
   return (
     <>
       <Popup
@@ -25,12 +30,14 @@ const Home = (props: any) => {
         <div onClick={() => setPopup(true)}>
           <h3>Play</h3>
         </div>
-        <div>
+        <div onClick={() => navigate('/rules')}>
           <h3>Rules</h3>
         </div>
+        <a href="https://github.com/barshefet/Durak-card-game">
         <div>
-          <h3>Game-Dev docs</h3>
+          <h3>GitHub</h3>
         </div>
+        </a>
       </div>
     </>
   );

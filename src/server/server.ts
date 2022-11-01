@@ -49,7 +49,7 @@ io.on("connection", (socket: any) => {
 
     if (
       ROOMS[roomMTF].roomReady === false &&
-      ROOMS[roomMTF].players.length < 5
+      ROOMS[roomMTF].players.length < 4
     ) {
       socket.join(ID);
       ROOMS[roomMTF]?.joinGame(playerName);

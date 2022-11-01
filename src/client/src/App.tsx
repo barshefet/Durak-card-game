@@ -1,9 +1,10 @@
 // TODO: finish game rules
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Game from "./components/Game";
 import Home from "./components/HomeComponents/Home";
+import Rules from "./components/RulesComponents/Rules";
 
 const App = () => {
 
@@ -28,7 +29,7 @@ const App = () => {
           path="/game"
           element={<Game roomID={roomID} playerName={playerName} />}
         />
-        {/* <Route path='/rules' element={<Rules />}/> */}
+        <Route path='/rules' element={<Rules />}/>
       </Routes>
     </>
   );
