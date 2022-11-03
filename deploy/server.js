@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const express_1 = __importDefault(require("express"));
 const http_1 = __importDefault(require("http"));
+const cors_1 = __importDefault(require("cors"));
 const socket_io_1 = require("socket.io");
 const MTF_1 = require("./MTF");
 const Deck_1 = require("./Deck");
@@ -14,11 +15,12 @@ const PORT = process.env.PORT || 4000;
 const root = path_1.default.join(process.cwd(), "client");
 const server = http_1.default.createServer(app);
 const ROOMS = [];
+app.use((0, cors_1.default)());
 app.use(express_1.default.static(root));
 app.get("/", (_req, res) => {
     res.sendFile(path_1.default.join(root, "index.html"));
 });
-const io = new socket_io_1.Server(server, { cors: { origin: "http://localhost:3000" } });
+const io = new socket_io_1.Server(server);
 io.on("connection", (socket) => {
     console.log(`client connected`);
     socket.on("create-room", (roomID, playerName) => {
