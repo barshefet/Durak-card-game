@@ -22,6 +22,7 @@ app.get("/", (_req, res) => {
 });
 
 const io = new Server(server, {cors: {origin: "http://localhost:3000"}});
+// sdassd
 
 io.on("connection", (socket: any) => {
   console.log(`client connected`);
