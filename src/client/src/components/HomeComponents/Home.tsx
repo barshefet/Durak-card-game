@@ -3,13 +3,26 @@
 import React, { useState } from "react";
 import "./Home.scss";
 import Popup from "./Popup";
+import Alert from './Alert/Alert'
 import { useNavigate } from "react-router-dom";
+import {socket} from '../../service/socket'
 
 
 const Home = (props: any) => {
   const [popup, setPopup] = useState(false);
+  const [alert, setAlert] = useState(false)
+  const [alertMsg, setAlertMsg] = useState('')
 
   const navigate = useNavigate()
+
+  socket.on('room-aproved', () => {
+    navigate('/game')
+  })
+
+  socket.on('alert', (msg: string) => {
+    setAlertMsg(msg)
+    setAlert(true)
+  })
 
   return (
     <>
@@ -21,6 +34,7 @@ const Home = (props: any) => {
         playerName={props.playerName}
         setName={props.setName}
       />
+      <Alert alert={alert} setAlert={setAlert} msg={alertMsg} />
       <div className="headline">
         <h1>Durak Card Game</h1>
         <h2>made by Bar Shefet</h2>
