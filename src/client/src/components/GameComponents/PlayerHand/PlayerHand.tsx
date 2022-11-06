@@ -52,7 +52,6 @@ const PlayerHand = (props: any) => {
       similarValueAttackCardIndex !== -1
     ) {
       socket.emit("attack", props.roomID, cardIndex, playerIndex);
-      console.log("con attack");
     } else if (props.defender && props.forward) {
       socket.emit("try-forward", props.roomID, cardIndex, playerIndex);
       props.setForward(false);
@@ -69,6 +68,11 @@ const PlayerHand = (props: any) => {
         playerIndex,
         props.tableSelectedCard.index
       );
+      props.setTableSelected({
+        index: 0,
+        suite: "",
+        value: "",
+      })
     } else if (
       !props.defender &&
       props.phase === 2 &&
@@ -78,6 +82,7 @@ const PlayerHand = (props: any) => {
     } else if (
       props.defender &&
       props.phase > 1 &&
+      props.tableSelectedCard.suite !== "" &&
       selectedCard.suite === props.kozar.suite &&
       props.tableSelectedCard.suite !== props.kozar.suite
     ) {
@@ -88,6 +93,11 @@ const PlayerHand = (props: any) => {
         playerIndex,
         props.tableSelectedCard.index
       );
+      props.setTableSelected({
+        index: 0,
+        suite: "",
+        value: "",
+      })
     }
   };
   return (

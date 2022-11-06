@@ -56,6 +56,7 @@ const AttackCards = (props: any) => {
                   className="attack-card"
                   key={`attackcard:${index}${card.suite}${card.value}1`}
                 >
+                  
                   <input
                     type="radio"
                     name="a"

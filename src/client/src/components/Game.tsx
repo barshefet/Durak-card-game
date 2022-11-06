@@ -30,6 +30,7 @@ function Game(props: any) {
     suite: "",
     value: "",
   });
+  const [checkedAttackCard, setCheckedAttackCard] = useState(false)
   const [forward, setForward] = useState(false);
   const [phase, setPhase] = useState(0);
   const [Players, setPlayers] = useState<Player[]>([]);
@@ -71,6 +72,7 @@ function Game(props: any) {
         kozar={kozar}
         forward={forward}
         setForward={setForward}
+        setCheckedAttackCard={setCheckedAttackCard}
       />
       <TableDeck kozar={kozar} />
       <Opponent gameReady={roomReady} players={Players} />
@@ -78,6 +80,7 @@ function Game(props: any) {
         defender={defender}
         attackCards={attackCards}
         setSelectedCard={setTableSelectedCard}
+        checkedCard={checkedAttackCard}
       />
       <DefenseCards defenceCards={defenceCards} roomID={props.roomID} />
       <GiveUpButton

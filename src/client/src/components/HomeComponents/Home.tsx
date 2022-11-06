@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Home.scss";
-import Popup from "./Popup";
+import Popup from "./Popup/Popup";
 import Alert from "./Alert/Alert";
 import { useNavigate } from "react-router-dom";
 import { socket } from "../../service/socket";

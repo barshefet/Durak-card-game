@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Popup.scss";
-import {socket} from '../../service/socket'
+import {socket} from '../../../service/socket'
 
 const Popup = (props: any) => {
 
