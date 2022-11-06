@@ -1,28 +1,25 @@
-//TODO: add a cards animation
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.scss";
 import Popup from "./Popup";
-import Alert from './Alert/Alert'
+import Alert from "./Alert/Alert";
 import { useNavigate } from "react-router-dom";
-import {socket} from '../../service/socket'
-
+import { socket } from "../../service/socket";
 
 const Home = (props: any) => {
   const [popup, setPopup] = useState(false);
-  const [alert, setAlert] = useState(false)
-  const [alertMsg, setAlertMsg] = useState('')
+  const [alert, setAlert] = useState(false);
+  const [alertMsg, setAlertMsg] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  socket.on('room-aproved', () => {
-    navigate('/game')
-  })
+  socket.on("room-aproved", () => {
+    navigate("/game");
+  });
 
-  socket.on('alert', (msg: string) => {
-    setAlertMsg(msg)
-    setAlert(true)
-  })
+  socket.on("alert", (msg: string) => {
+    setAlertMsg(msg);
+    setAlert(true);
+  });
 
   return (
     <>
@@ -44,13 +41,13 @@ const Home = (props: any) => {
         <div onClick={() => setPopup(true)}>
           <h3>Play</h3>
         </div>
-        <div onClick={() => navigate('/rules')}>
+        <div onClick={() => navigate("/rules")}>
           <h3>Rules</h3>
         </div>
         <a href="https://github.com/barshefet/Durak-card-game">
-        <div>
-          <h3>GitHub</h3>
-        </div>
+          <div>
+            <h3>GitHub</h3>
+          </div>
         </a>
       </div>
     </>

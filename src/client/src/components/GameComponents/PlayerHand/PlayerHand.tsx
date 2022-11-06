@@ -1,10 +1,10 @@
 import React from "react";
 import { Card } from "../../../models/cards.model";
+import { DefenceCard } from "../../../models/defenceCards.model";
 import { socket } from "../../../service/socket";
 import "./PlayerHand.scss";
 
 const PlayerHand = (props: any) => {
-
   //value map for numeral value comparison
   const VALUES = [
     { strValue: "6", numValue: 6 },
@@ -23,9 +23,9 @@ const PlayerHand = (props: any) => {
   // either by attacking or defending, or even as skipping a turn by forwarding the attack cards
 
   const tryAttack = (cardIndex: number, playerIndex: number) => {
-    // gets the card that was clicked on as a object 
+    // gets the card that was clicked on as a object
     let selectedCard = props.players[playerIndex].cards[cardIndex];
-    // gets the numeral value of the player`s clicked card 
+    // gets the numeral value of the player`s clicked card
     let selectedCardValue = VALUES.find(
       (element) => element.strValue === selectedCard.value
     );
@@ -33,13 +33,14 @@ const PlayerHand = (props: any) => {
     let tableSelectedCardValue = VALUES.find(
       (element) => element.strValue === props.tableSelectedCard.value
     );
-      //check if their is a similar value card on the attack card array
+    //check if their is a similar value card on the attack card array
     let similarValueAttackCardIndex = props.attackCards.findIndex(
       (card: Card) => card.value === selectedCard.value
     );
-      //same, just on the defence cards array
-    let similarValueDefenceCardIndex = props.defenceCards.find(
-      (card: Card) => card.value === selectedCard.value
+    //same, just on the defence cards array
+    let similarValueDefenceCardIndex = props.defenceCards.findIndex(
+      (defenceCard: DefenceCard) =>
+        defenceCard.card.value === selectedCard.value
     );
 
     if (props.attacker && props.phase === 1) {
@@ -51,6 +52,7 @@ const PlayerHand = (props: any) => {
       similarValueAttackCardIndex !== -1
     ) {
       socket.emit("attack", props.roomID, cardIndex, playerIndex);
+      console.log("con attack");
     } else if (props.defender && props.forward) {
       socket.emit("try-forward", props.roomID, cardIndex, playerIndex);
       props.setForward(false);
