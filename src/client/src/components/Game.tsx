@@ -30,17 +30,18 @@ function Game(props: any) {
     suite: "",
     value: "",
   });
-  const [checkedAttackCard, setCheckedAttackCard] = useState(false)
+  const [checkedAttackCard, setCheckedAttackCard] = useState(false);
   const [forward, setForward] = useState(false);
   const [phase, setPhase] = useState(0);
   const [Players, setPlayers] = useState<Player[]>([]);
+  const [deckCount, setDeckCount] = useState([]);
 
   socket.on("receive-mtf", (mtf: MTF) => {
     let index = mtf.players.findIndex(
       (element: any) => element.playerName === props.playerName
     );
     setPlayerIndex(index);
-
+console.log(mtf)
     if (index !== -1) {
       setRoomReady(mtf.roomReady);
       setPlayers(mtf.players);
@@ -51,6 +52,7 @@ function Game(props: any) {
       setDefender(mtf.players[index].isDefender);
       setPhase(mtf.phase);
       setDefenceCards(mtf.defenceCards);
+      setDeckCount(mtf.deck);
     }
   });
 
@@ -74,7 +76,7 @@ function Game(props: any) {
         setForward={setForward}
         setCheckedAttackCard={setCheckedAttackCard}
       />
-      <TableDeck kozar={kozar} />
+      <TableDeck kozar={kozar} deckCount={deckCount} />
       <Opponent gameReady={roomReady} players={Players} />
       <AttackCards
         defender={defender}
