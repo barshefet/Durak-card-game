@@ -1,11 +1,18 @@
 .deck-count-container{
     position: fixed;
     top: 9.5%;
-    left: 45.5%;
+    left: 45.85%;
     z-index: 3249834;
     .deck-count{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
         font-size: 28px;
-        color: rgb(183, 183, 93);
+        color: rgb(177, 177, 63);
         text-shadow: black 2px 2px 2px;
+        h1{
+            text-align: center;
+        }
     }
 }
