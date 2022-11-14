@@ -6,7 +6,7 @@ the game can be played with 2-4 players that can connect together to a "game-roo
 the game updates to all players at the same time using a socket.IO server that monitors the game and makes sure all players get 
 the same game room info in real-time.
 
-## stack
+## Stack
 React, Express and Socket.IO
 
 ## Link to the deployed project
