@@ -6,7 +6,7 @@ return(
     <>
     <div className="deck-count-container">
         <div className="deck-count">
-            <h1>21</h1>
+            <h1>{props.deckCount.length}</h1>
         </div>
     </div>
     </>
