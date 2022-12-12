@@ -2,7 +2,7 @@
   "name": "heroku-starter-project",
   "scripts": {
     "start": "gulp",
-    "build-client": "cd ./src/client && npm run build",
+    "build-client": "cd ./src/client && npm i && npm run build",
     "server": "nodemon --watch ./src/server ./src/server/server.ts",
     "deploy": "gulp deploy",
     "build-and-deploy": "npm run build-client && npm run deploy",
