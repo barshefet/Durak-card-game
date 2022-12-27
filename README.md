@@ -10,7 +10,7 @@ the same game room info in real-time.
 React, Express and Socket.IO
 
 ## Link to the deployed project
-https://durak.up.railway.app/game
+https://durak.up.railway.app
 
 ## How to run localy
 1. make sure to install all packages. both at the client folder and at the server. (npm ci)
