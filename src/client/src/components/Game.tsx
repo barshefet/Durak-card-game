@@ -41,7 +41,7 @@ function Game(props: any) {
       (element: any) => element.playerName === props.playerName
     );
     setPlayerIndex(index);
-console.log(mtf)
+
     if (index !== -1) {
       setRoomReady(mtf.roomReady);
       setPlayers(mtf.players);
