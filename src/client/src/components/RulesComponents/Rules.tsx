@@ -18,8 +18,8 @@ const Rules = () => {
           </div>
 
           <div className="single-subject">
-            <h2>What is the game`s goal?</h2>
-            <p>Don`t be the fool!</p>
+            <h2>What is the goal of the game?</h2>
+            <p>Don't be the fool!</p>
             <p><p>The objective of the game is to shed all one's cards when there are no more cards left in the deck. At the end of the game, the last player with cards in their hand is the durak or 'fool'.</p></p>
           </div>
 

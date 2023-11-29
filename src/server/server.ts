@@ -22,7 +22,8 @@ app.get("/", (_req, res) => {
   res.sendFile(path.join(root, "index.html"));
 });
 
-const io = new Server(server);
+// const io = new Server(server);
+const io = new Server(server, {cors: {origin: 'http://localhost:3000'}});
 
 io.on("connection", (socket: any) => {
   let socketID = socket.id;
